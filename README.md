@@ -166,12 +166,12 @@ The total cost for a single mission execution (**C<sub>total</sub>**) is the sum
 > 💡 **Conclusion:** Can run **2,000+ missions for $1.00 USD**, making this one of the most cost-efficient autonomous fleet architectures possible.
 
 ### 🚀 Scaling to a Fleet (1,000+ VTOLs)
-Unlike monolithic designs, this architecture scales horizontally with **zero code changes**:
 
-- **🧵 Concurrency** → Lambda & Step Functions handle thousands of concurrent 
-  mission executions out of the box
-- **🛡️ Throttling Protection** → SQS acts as a buffer, ensuring the Cloud Extension is never overwhelmed by sudden telemetry spikes from the fleet.
-- **🌍 Regional Availability** → Stack is deployed via **AWS CDK**, allowing one-click replication across multiple AWS Regions (e.g., `us-east-1`, `eu-central-1`) to reduce latency for global operations.
+Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
+
+- **🔀 Concurrency** → Lambda & Step Functions spin up independent executions per aircraft automatically
+- **🛡️ Throttling Protection** → SQS absorbs sudden telemetry spikes, ensuring the pipeline is never overwhelmed
+- **🌍 Regional Availability** → AWS CDK enables one-click replication across regions (e.g. `eu-central-1` → `us-east-1`) for global low-latency operations
 
 ### 🛠️ Cost Optimization Strategies
 
