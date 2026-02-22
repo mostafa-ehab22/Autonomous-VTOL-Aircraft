@@ -93,18 +93,6 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - 📡 **Mass Device Sync *(AWS IoT Core)*:** Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
 - 🌍 **Global Replication *(AWS CDK)*:** Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
 
-
-<div align="center">
-
-| Service | Why It Scales |
-|:---:|:---:|
-| 🧠 Bedrock Decision Engine | Processes any number of concurrent mission decisions |
-| ⚙️ Step Functions Workflow | Each VTOL runs its own fully independent execution |
-| 📡 IoT Core Pipeline | Built for millions of connected devices |
-| 🪞 Device Shadow | One isolated shadow per aircraft |
-
-</div>
-
 > ⚠️ **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
 
 ## 🔍 Architectural Impact
