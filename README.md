@@ -99,7 +99,7 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 
 </div>
 
-## 🚀 Built to Scale - Zero Changes
+## 🚀 Scale with Zero Changes
 
 Beyond a single aircraft, the architecture scales horizontally with **ZERO CHANGES** - every service is built to handle a fleet out of the box:
 
