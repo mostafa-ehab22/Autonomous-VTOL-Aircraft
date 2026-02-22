@@ -122,23 +122,23 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 
 ## 🧱 AWS Cloud Architecture
 
-#### 📡 Ingestion & Queuing
+### 📡 Ingestion & Queuing
 - **AWS IoT Core** → MQTT ingestion point, Device Shadow for offline sync
 - **Amazon SQS** → Mission message queue with Dead Letter Queue after 3 failed retries
 - **EventBridge Pipes** → Serverless trigger from SQS to Step Functions
 
-#### ⚙️ Orchestration & Intelligence
+### ⚙️ Orchestration & Intelligence
 - **AWS Step Functions** → Orchestrates the full mission workflow state machine
 - **Amazon Bedrock** → LLM-powered mission decision making (Safe / Unsafe classification)
 - **AWS Lambda** → Data normalization, command dispatch, mission continuation
 - **Amazon DynamoDB** → Mission state logs and event history
 
-#### 🔔 Alerting & Feedback
+### 🔔 Alerting & Feedback
 - **Amazon SNS** → Dual-topic alerting: Mission Log Topic (safe) and Alert Topic (unsafe)
 - **Device Shadow** → Bidirectional state sync between cloud and VTOL (offline-resilient)
 - **Amazon S3** → Long-term telemetry archive (Glacier lifecycle)
 
-#### 👁️ Observability & Security
+### 👁️ Observability & Security
 - **Amazon CloudWatch** → Monitoring and logs
 - **AWS CloudTrail** → API call audit logs
 - **AWS X-Ray** → End-to-end distributed tracing
