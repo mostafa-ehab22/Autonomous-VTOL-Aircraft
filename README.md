@@ -4,7 +4,7 @@ A full-stack autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system c
 <div align="center">
   
 | | ✈️ Onboard System | 🌥️ Cloud Extension |
-|---|:---:|:---:|
+|:---:|:---:|:---:|
 | 🔧 **What** | Embedded flight control & perception | Serverless AWS mission intelligence |
 | 🖥️ **Runs on** | Raspberry Pi + Pixhawk | AWS (eu-central-1) |
 | ⚡ **Handles** | Anything time-critical | Anything cognitive |
@@ -99,16 +99,20 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 
 </div>
 
-## 🚀 Scale with Zero Changes
+## 🚀 Scaling to a Fleet (1,000+ VTOLs)
 
-Beyond a single aircraft, the architecture scales horizontally with **ZERO CHANGES** - every service is built to handle a fleet out of the box:
+Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
+
+- **🔀 Concurrency** → Lambda & Step Functions spin up independent executions per aircraft automatically
+- **🛡️ Throttling Protection** → SQS absorbs sudden telemetry spikes, ensuring the pipeline is never overwhelmed
+- **🌍 Regional Availability** → AWS CDK enables one-click replication across regions (e.g. `eu-central-1` → `us-east-1`) for global low-latency operations
 
 <div align="center">
 
 | Service | Why It Scales |
-|---|:---:|
+|:---:|:---:|
 | 🧠 Bedrock Decision Engine | Processes any number of concurrent mission decisions |
-| ⚙️ Step Functions Workflow | Each VTOL runs its own independent execution |
+| ⚙️ Step Functions Workflow | Each VTOL runs its own fully independent execution |
 | 📡 IoT Core Pipeline | Built for millions of connected devices |
 | 🪞 Device Shadow | One isolated shadow per aircraft |
 
@@ -164,14 +168,6 @@ The total cost for a single mission execution (**C<sub>total</sub>**) is the sum
 </div>
 
 > 💡 **Conclusion:** Can run **2,000+ missions for $1.00 USD**, making this one of the most cost-efficient autonomous fleet architectures possible.
-
-### 🚀 Scaling to a Fleet (1,000+ VTOLs)
-
-Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
-
-- **🔀 Concurrency** → Lambda & Step Functions spin up independent executions per aircraft automatically
-- **🛡️ Throttling Protection** → SQS absorbs sudden telemetry spikes, ensuring the pipeline is never overwhelmed
-- **🌍 Regional Availability** → AWS CDK enables one-click replication across regions (e.g. `eu-central-1` → `us-east-1`) for global low-latency operations
 
 ### 🛠️ Cost Optimization Strategies
 
