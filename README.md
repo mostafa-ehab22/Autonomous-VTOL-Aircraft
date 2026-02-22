@@ -83,22 +83,6 @@ By moving cognitive logic to the cloud, the Pi is freed up to do what it does be
 
 </div>
 
-## 🔍 Architectural Impact
-
-This isn't just a compute offload: every responsibility moved to the cloud directly eliminates a real in-flight failure mode that could compromise the mission, corrupt critical data, or worse, endanger the aircraft itself:
-
-<div align="center">
-
-| 🚫 Limitation (Pi Only) | 🌩️ Cloud Upgrade | 🎯 Architectural Impact |
-|---|---|---|
-| 🔴 **Static Logic:** Mission decisions are hardcoded Python scripts | 🧠 **Amazon Bedrock** | The aircraft gets a dynamic AI brain for complex, edge-case safety classification |
-| 💥 **Local SD Logging:** Flight logs corrupt or die with the drone in a crash | 🗄️ **Amazon DynamoDB** | Logs stream instantly to a highly available database → data survives physical destruction |
-| 📵 **Dropped Telemetry:** Network drops cause lost commands with no retry | 📨 **SQS + Dead Letter Queue** | Failed telemetry is held and retried automatically → zero commands silently dropped |
-| 🔄 **Local State Only:** A mid-air reboot causes the drone to forget its mission | 🪞 **AWS IoT Device Shadow** | The cloud maintains a perfect virtual copy → reconnections instantly restore mission state |
-| 🔕 **Silent Failures:** Only the local GCS sees safety alerts | 🔔 **SNS (Mobile/Email)** | Instant push notifications to all stakeholders on any safety breach, from anywhere |
-
-</div>
-
 ## 🚀 Scaling to a Fleet (1,000+ VTOLs)
 
 Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
@@ -120,24 +104,41 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 
 > ⚠️ **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
 
+## 🔍 Architectural Impact
+
+This isn't just a compute offload: every responsibility moved to the cloud directly eliminates a real in-flight failure mode that could compromise the mission, corrupt critical data, or worse, endanger the aircraft itself:
+
+<div align="center">
+
+| 🚫 Limitation (Pi Only) | 🌩️ Cloud Upgrade | 🎯 Architectural Impact |
+|---|---|---|
+| 🔴 **Static Logic:** Mission decisions are hardcoded Python scripts | 🧠 **Amazon Bedrock** | The aircraft gets a dynamic AI brain for complex, edge-case safety classification |
+| 💥 **Local SD Logging:** Flight logs corrupt or die with the drone in a crash | 🗄️ **Amazon DynamoDB** | Logs stream instantly to a highly available database → data survives physical destruction |
+| 📵 **Dropped Telemetry:** Network drops cause lost commands with no retry | 📨 **SQS + Dead Letter Queue** | Failed telemetry is held and retried automatically → zero commands silently dropped |
+| 🔄 **Local State Only:** A mid-air reboot causes the drone to forget its mission | 🪞 **AWS IoT Device Shadow** | The cloud maintains a perfect virtual copy → reconnections instantly restore mission state |
+| 🔕 **Silent Failures:** Only the local GCS sees safety alerts | 🔔 **SNS (Mobile/Email)** | Instant push notifications to all stakeholders on any safety breach, from anywhere |
+
+</div>
+
 ## 🧱 AWS Cloud Architecture
 
-### Core Pipeline
+#### 📡 Ingestion & Queuing
 - **AWS IoT Core** → MQTT ingestion point, Device Shadow for offline sync
 - **Amazon SQS** → Mission message queue with Dead Letter Queue after 3 failed retries
 - **EventBridge Pipes** → Serverless trigger from SQS to Step Functions
-- **AWS Step Functions** → Orchestrates the full mission workflow state machine
 
-### AI & Data
+#### ⚙️ Orchestration & Intelligence
+- **AWS Step Functions** → Orchestrates the full mission workflow state machine
 - **Amazon Bedrock** → LLM-powered mission decision making (Safe / Unsafe classification)
 - **AWS Lambda** → Data normalization, command dispatch, mission continuation
 - **Amazon DynamoDB** → Mission state logs and event history
 
-### Alerting & Feedback
+#### 🔔 Alerting & Feedback
 - **Amazon SNS** → Dual-topic alerting: Mission Log Topic (safe) and Alert Topic (unsafe)
 - **Device Shadow** → Bidirectional state sync between cloud and VTOL (offline-resilient)
+- **Amazon S3** → Long-term telemetry archive (Glacier lifecycle)
 
-### Observability
+#### 👁️ Observability & Security
 - **Amazon CloudWatch** → Monitoring and logs
 - **AWS CloudTrail** → API call audit logs
 - **AWS X-Ray** → End-to-end distributed tracing
