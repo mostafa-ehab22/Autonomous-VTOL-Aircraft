@@ -68,7 +68,9 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🎯 Why a Cloud Extension?
 
-Physical flight hardware has strict operational limits. Originally, the Raspberry Pi was responsible for mission logic, state management, data logging, AND running ROS2 + high-framerate YOLO11 simultaneously. This created a massive compute burden, increasing the risk of thermal throttling or process crashes mid-flight.
+Physical flight hardware has strict operational limits. Originally, the Raspberry Pi was responsible for mission logic, state management, data logging, AND running ROS2 + high-framerate YOLO11 simultaneously. 
+
+This created a massive compute burden, increasing the risk of thermal throttling or process crashes mid-flight.
 
 By moving cognitive logic to the cloud, the Pi is freed up to do what it does best:
 
