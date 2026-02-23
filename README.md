@@ -154,7 +154,7 @@ The total cost for a single mission execution (**C<sub>total</sub>**) is the sum
 <div align="center">
 
 | Service | Estimated Usage (1 Mission) | Estimated Cost (USD) |
-|:---:|:---:|:---:|
+|---|:---:|:---:|
 | 📡 AWS IoT Core | 100 MQTT Messages + 2 Shadow Updates | ~$0.00012 |
 | 🧠 Amazon Bedrock | 300 Input + 100 Output Tokens (Nova Lite) | ~$0.000042 |
 | ⚙️ Step Functions | 12 State Transitions | ~$0.00030 |
