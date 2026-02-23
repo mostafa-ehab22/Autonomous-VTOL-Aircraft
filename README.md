@@ -1,7 +1,7 @@
 ## 🎯 Project Overview
 A full-stack autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard embedded flight control** with a **stateless, event-driven AWS cloud extension** for AI-driven mission decision making. 
 
-Designed to scale from one drone to a **fleet of thousands** with **zero architectural changes**. 
+Designed to scale from one aircraft to a **fleet of thousands** with **zero architectural changes**. 
 
 The system lives in two separate parts:
   
