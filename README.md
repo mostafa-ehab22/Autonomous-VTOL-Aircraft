@@ -79,7 +79,7 @@ By moving cognitive logic to the cloud, the Pi is freed up to do what it does be
 <div align="center">
 
 | Responsibility | Before (Pi Only) | After (Cloud Extension) |
-|:---:|:---:|:---:|
+|---|:---:|:---:|
 | 🧠 Mission decision making | Python scripts on Pi | **AWS Bedrock (AI)** |
 | 📋 State & mission logging | Local files / SQLite | **DynamoDB** |
 | 🔔 Pilot notifications | Ground Control Station only | **SNS (Mobile/Email)** |
