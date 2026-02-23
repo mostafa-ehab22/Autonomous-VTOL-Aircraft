@@ -107,7 +107,7 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 <div align="center">
 
 | 🚫 Limitation (Pi Only) | 🌩️ Cloud Upgrade | 🎯 Architectural Impact |
-|---|---|---|
+|---|:---:|---|
 | 🔴 **Static Logic:** Mission decisions are hardcoded Python scripts | 🧠 **Amazon Bedrock** | The aircraft gets a dynamic AI brain for complex, edge-case safety classification |
 | 💥 **Local SD Logging:** Flight logs corrupt or die with the drone in a crash | 🗄️ **Amazon DynamoDB** | Logs stream instantly to a highly available database → data survives physical destruction |
 | 📵 **Dropped Telemetry:** Network drops cause lost commands with no retry | 📨 **SQS + Dead Letter Queue** | Failed telemetry is held and retried automatically → zero commands silently dropped |
