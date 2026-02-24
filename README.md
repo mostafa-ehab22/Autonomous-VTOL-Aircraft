@@ -1,5 +1,4 @@
 ## 🎯 Project Overview
-![Python](https://img.shields.io/badge/Python-darkblue.svg?logo=python)
 ![AWS](https://img.shields.io/badge/⛅_AWS-232F3E)
 ![RaspberryPi](https://img.shields.io/badge/Raspbeery_Pi-A22846?logo=raspberrypi)
 ![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
