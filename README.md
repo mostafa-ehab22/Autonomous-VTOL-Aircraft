@@ -1,6 +1,8 @@
 ## 🎯 Project Overview
-![AWS Serverless](https://img.shields.io/badge/⛅_AWS_Serverless-232F3E)
-![ROS2 Jazzy](https://img.shields.io/badge/ROS2_Jazzy-0A7D4B?logo=ros)
+![Python](https://img.shields.io/badge/Python-darkblue.svg?logo=python)
+![AWS](https://img.shields.io/badge/⛅_AWS-232F3E)
+![RPi](https://img.shields.io/badge/RPi-A22846?logo=raspberrypi)
+![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
 ![ArduPilot](https://img.shields.io/badge/✈️_ArduPilot-CC8800)
 
 A full-stack autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard embedded flight control** with a **stateless, event-driven AWS cloud extension** for AI-driven mission decision making. 
