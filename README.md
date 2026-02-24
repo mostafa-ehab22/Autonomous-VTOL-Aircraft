@@ -7,7 +7,7 @@ The system lives in two separate parts:
 <div align="center">
   
 | | ✈️ Onboard System | 🌥️ Cloud Extension |
-|:---:|:---:|:---:|
+|---|:---:|:---:|
 | 🔧 **What** | Embedded flight control & perception | Serverless AWS mission intelligence |
 | 🖥️ **Runs on** | Raspberry Pi + Pixhawk | AWS (eu-central-1) |
 | ⚡ **Handles** | Anything time-critical | Anything cognitive |
