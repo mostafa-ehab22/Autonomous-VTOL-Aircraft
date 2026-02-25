@@ -1,6 +1,6 @@
 ## 🎯 Project Overview
 ![AWS](https://img.shields.io/badge/⛅_AWS-232F3E)
-![RaspberryPi](https://img.shields.io/badge/Raspbeery_Pi-A22846?logo=raspberrypi)
+![RaspberryPi](https://img.shields.io/badge/Raspberry_Pi-A22846?logo=raspberrypi)
 ![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
 ![ArduPilot](https://img.shields.io/badge/✈️_ArduPilot-B8860B)
 
