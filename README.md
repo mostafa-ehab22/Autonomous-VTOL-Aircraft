@@ -20,7 +20,7 @@ The system lives in two separate parts:
 
 </div>
 
-> The two parts are **independent by design**. Enabling **horizontal scaling** with **no code modifications**.
+The two parts are **independent by design**. Enabling **horizontal scaling** with **no code modifications**.
 > - Onboard system handles everything **time-critical**.
 > - Cloud handles everything **cognitive**. <br>
 
