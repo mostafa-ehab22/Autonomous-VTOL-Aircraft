@@ -147,7 +147,7 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 - **AWS X-Ray** → End-to-end distributed tracing
 - **IAM** → Least-privilege access control across all services
 
-## 💰 Cost & Scalability Analysis
+## 💰 Cost Analysis
 
 This entire cloud architecture is designed with a **"Pay-as-you-go" serverless model**. By utilizing event-driven triggers, no infrastructure runs 24/7 and no idle containers. When the fleet is grounded, 
 the cost is **$0.00**. 
