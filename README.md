@@ -141,7 +141,7 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 - **Device Shadow** → Bidirectional state sync between cloud and VTOL (offline-resilient)
 - **Amazon S3** → Long-term telemetry archive (Glacier lifecycle)
 
-### 👁️ Observability & Security
+### 👀 Observability & Security
 - **Amazon CloudWatch** → Monitoring and logs
 - **AWS CloudTrail** → API call audit logs
 - **AWS X-Ray** → End-to-end distributed tracing
