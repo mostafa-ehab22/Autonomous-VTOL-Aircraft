@@ -186,26 +186,28 @@ To maintain this efficiency, the following optimizations are implemented:
 **✅ Safe Path:**
 ```
 Safety Check → SAFE
-→ SNS (Log Mission Topic)
-→ Mission Notifications (Pilot Mobile/Email)
-→ Mission Continuation Lambda (DynamoDB update + Shadow sync)
+→ Amazon SNS (Log Mission Topic)
+→ Mission Notifications (Mobile/Email)
+→ Continue Mission (Sync State & Notify Pilot)
 → END
 ```
 
 **❌ Unsafe Path:**
 ```
 Safety Check → UNSAFE
-→ AWS Command Lambda (Update Device Shadow → VTOL receives abort command)
-→ SNS (Log Alert Topic)
+→ Dispatch Abort Command (Update Shadow Device → VTOL receives abort command)
+→ Amazon SNS (Log Alert Topic)
 → Wait State (30 seconds, waitForTaskToken)
-→ ACK received via IoT Rule → Verify Acknowledgment Lambda
+→ ACK received via IoT Rule → Verify Acknowledgment (Validate Task Token)
 → END
 ```
 
-⌛ Safety Check (Bedrock) → TIMEOUT / API ERROR
+⚠️ Cloud Failsafe Path (Infrastructure Error):
 ```
-→ Emergency Failsafe Lambda (Update Device Shadow → Force RTL command)
-→ SNS (Log Alert Topic - "AI Unreachable, RTL Initiated")
+Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
+→ Execute Failsafe (Trigger RTL Command)
+→ Update Shadow State (Forces RTL command directly to VTOL via IoT Core)
+→ Amazon SNS (Log Alert Topic — "AI Unreachable, RTL Initiated")
 → END
 ```
 
