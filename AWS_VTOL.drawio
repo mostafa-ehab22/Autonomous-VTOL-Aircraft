@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.6 Chrome/140.0.7339.249 Electron/38.8.0 Safari/537.36" version="29.3.6">
   <diagram name="Page-1" id="jThwC1QQGkIbfXUb8Zvf">
-    <mxGraphModel dx="1723" dy="915" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="1440" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -123,7 +123,7 @@
         </mxCell>
         <mxCell id="ZDdqdCrKhh2vQjz3Mj56-2" connectable="0" parent="ZDdqdCrKhh2vQjz3Mj56-1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;" value="&lt;span style=&quot;font-size: 18px; font-weight: 700;&quot;&gt;Update Shadow State&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" x="-0.1537" y="-2" as="geometry">
-            <mxPoint x="106" y="-18" as="offset" />
+            <mxPoint x="20" y="-18" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="qPVJcjXrcHEsMj8DoH4e-4" parent="1XaqtbDOCL1T9YkJ7YMd-19" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=14;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;shadow=1;html=1;spacingTop=2;spacing=1;textShadow=0;spacingLeft=0;labelPosition=center;spacingRight=8;" value="Continue Mission&amp;nbsp;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;(Sync State &amp;amp; Notify Pilot)&lt;/span&gt;&lt;/div&gt;" vertex="1">
@@ -131,6 +131,12 @@
         </mxCell>
         <mxCell id="oyV1l8olMm9FQRHlxPPu-17" parent="1XaqtbDOCL1T9YkJ7YMd-19" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=14;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;shadow=1;html=1;spacingTop=2;spacing=1;textShadow=0;spacingLeft=0;labelPosition=center;spacingRight=8;horizontal=1;" value="Dispatch Abort Command&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;(Update Shadow Device)&lt;/span&gt;" vertex="1">
           <mxGeometry height="78" width="78" x="506" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="HG19eKLrzD_TT2lJOdT5-4" edge="1" parent="1XaqtbDOCL1T9YkJ7YMd-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=oval;endFill=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="251" y="400" as="sourcePoint" />
+            <mxPoint x="251" y="480" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="nyudAaHnvPoQ_HnCoWgG-5" parent="1XaqtbDOCL1T9YkJ7YMd-19" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=14;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;shadow=1;html=1;spacingTop=2;spacing=1;textShadow=0;spacingLeft=0;labelPosition=center;spacingRight=8;horizontal=1;" value="&lt;font&gt;Execute Failsafe&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-weight: normal;&quot;&gt;(Trigger RTL Command)&lt;/font&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="78" width="78" x="212" y="280" as="geometry" />
