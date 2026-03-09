@@ -202,6 +202,13 @@ Safety Check → UNSAFE
 → END
 ```
 
+⌛ Safety Check (Bedrock) → TIMEOUT / API ERROR
+```
+→ Emergency Failsafe Lambda (Update Device Shadow → Force RTL command)
+→ SNS (Log Alert Topic - "AI Unreachable, RTL Initiated")
+→ END
+```
+
 > The Wait State uses Step Functions' `.waitForTaskToken` callback pattern. The task token is embedded in the command sent to the VTOL. The VTOL acknowledges via MQTT → IoT Rule → `SendTaskSuccess` to resume execution.
 
 ## 🌉 Integration: How Onboard Meets Cloud
