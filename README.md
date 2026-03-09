@@ -202,7 +202,7 @@ Safety Check → UNSAFE
 → END
 ```
 
-⚠️ Cloud Failsafe Path (Infrastructure Error):
+⚠️ **Cloud Failsafe Path (Infrastructure Error):**
 ```
 Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 → Execute Failsafe (Trigger RTL Command)
