@@ -153,10 +153,11 @@ This entire cloud architecture is designed with a **"Pay-as-you-go" serverless m
 the cost is **$0.00**. 
 
 ### 📉 Estimated Cost per Flight
-The total cost for a single mission execution (**Cost<sub>Total</sub>**) is the sum of its serverless components:
-  
-**Cost<sub>Total</sub>** = **C<sub>IoT</sub>** + **C<sub>Lambda</sub>** + **C<sub>Bedrock</sub>** + **C<sub>StepFunctions</sub>** + **C<sub>SNS</sub>** + **C<sub>DB</sub>**
 
+Total cost for a single mission execution is the sum of its serverless components:
+```
+Total Cost = C_IoT + C_Lambda + C_Bedrock + C_StepFunctions + C_SNS + C_DynamoDB
+```
 
 <div align="center">
 
