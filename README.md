@@ -241,7 +241,7 @@ The ROS2 MAVLink bridge node publishes telemetry to IoT Core and subscribes to D
 
 ## 📂 Project Structure
 ```
-AUTONOMOUS_VTOL/
+AUTONOMOUS-VTOL-AIRCRAFT/
 ├── 🌥️ cloud_infrastructure/       # AWS CDK Serverless Backend
 │   ├── cloud_infrastructure/
 │   │   ├── database_stack.py      # DynamoDB Flight Logs
