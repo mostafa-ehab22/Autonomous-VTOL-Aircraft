@@ -1,1 +1,45 @@
+# =========================
+#        Diagrams
+# =========================
 *.drawio.bkp
+
+# =========================
+# Security & Environment
+# =========================
+# NEVER commit environment variables or AWS keys!
+.env
+.env.*
+*.pem
+
+# =========================
+#     AWS CDK & Node
+# =========================
+.cdk.staging
+cdk.out
+package-lock.json
+
+# =========================
+#    Python & Testing
+# =========================
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# =========================
+# ROS2 (Onboard Workspace)
+# =========================
+build/
+install/
+log/
+
+# =========================
+#  IDE, Editor, & OS Files
+# =========================
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
