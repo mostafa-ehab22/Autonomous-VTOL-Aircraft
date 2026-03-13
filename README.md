@@ -250,8 +250,7 @@ AUTONOMOUS-VTOL-AIRCRAFT/
 │   ├── cdk.json                   
 │   └── requirements.txt           
 ├── 📖 docs/
-│   ├── src/
-│   │   └── AWS_VTOL.drawio        # Editable Architecture Source                      
+│   ├── AWS_VTOL.drawio            # Editable Architecture Source                          
 │   ├── cloud_architecture.png     
 │   └── onboard_architecture.jpeg  
 └── README.md
