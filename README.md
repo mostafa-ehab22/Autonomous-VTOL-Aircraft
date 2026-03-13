@@ -20,9 +20,8 @@ The system lives in two separate parts:
 
 </div>
 
-The two parts are **independent by design**.
-
-> Enabling **horizontal scaling** with **no code modifications**.
+> [!NOTE]
+The two parts are **independent by design**. Enabling **horizontal scaling** with **no code modifications**.
 > - Onboard system handles everything **time-critical**.
 > - Cloud handles everything **cognitive**. <br>
 
@@ -105,7 +104,8 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - 📡 **Mass Device Sync *(AWS IoT Core)*:** Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
 - 🌍 **Global Replication *(AWS CDK)*:** Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
 
-> ⚠️ **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
+> [!IMPORTANT]
+> **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
 
 ## 🔍 Architectural Impact
 
@@ -155,8 +155,7 @@ the cost is **$0.00**.
 ### 📉 Estimated Cost per Flight
 The total cost for a single mission execution (**Cost<sub>Total</sub>**) is the sum of its serverless components:
 
-
-> **Cost<sub>Total</sub>** = **C<sub>IoT</sub>** + **C<sub>Lambda</sub>** + **C<sub>Bedrock</sub>** + **C<sub>StepFunctions</sub>** + **C<sub>SNS</sub>** + **C<sub>DB</sub>**
+**Cost<sub>Total</sub>** = **C<sub>IoT</sub>** + **C<sub>Lambda</sub>** + **C<sub>Bedrock</sub>** + **C<sub>StepFunctions</sub>** + **C<sub>SNS</sub>** + **C<sub>DB</sub>**
 
 <div align="center">
 
@@ -171,7 +170,8 @@ The total cost for a single mission execution (**Cost<sub>Total</sub>**) is the 
 
 </div>
 
-> 💡 **Conclusion:** Can run **2,000+ missions for $1.00 USD**, making this one of the most cost-efficient autonomous fleet architectures possible.
+> [!TIP]
+> Can run **2,000+ missions for $1.00 USD**, making this one of the most cost-efficient autonomous fleet architectures possible.
 
 ### 🛠️ Cost Optimization Strategies
 
@@ -211,6 +211,7 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 → END
 ```
 
+> [!NOTE]
 > The Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
 > The task token is embedded in the command sent to the VTOL. <br>
 > The VTOL acknowledges via MQTT → IoT Rule → `SendTaskSuccess` to resume execution.
@@ -236,6 +237,23 @@ AWS IoT Core
 
 The ROS2 MAVLink bridge node publishes telemetry to IoT Core and subscribes to Device Shadow delta updates: allowing cloud-originated commands (e.g., abort, reroute) to flow back down to the VTOL seamlessly.
 
+## 📂 Project Structure
+```
+AUTONOMOUS_VTOL/
+├── 🌥️ cloud_infrastructure/       # AWS CDK Serverless Backend
+│   ├── cloud_infrastructure/
+│   │   ├── database_stack.py      # DynamoDB Flight Logs
+│   │   └── messaging_stack.py     # SQS Mission Queue + DLQ
+│   ├── app.py                     # CDK Entry Point
+│   ├── cdk.json                   
+│   └── requirements.txt           
+├── 📖 docs/                       
+│   ├── cloud_architecture.png     
+│   └── onboard_architecture.jpeg  
+├── AWS_VTOL.drawio                # Editable Architecture Source
+└── README.md
+```
+
 ## 🚀 Deployment
 
 ### Prerequisites
@@ -247,11 +265,21 @@ AWS CDK installed (npm install -g aws-cdk)
 
 ### Deploy Cloud Stack
 ```bash
-cd cloud/infrastructure
+# Navigate to the cloud infrastructure directory
+cd cloud_infrastructure
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Bootstrap AWS environment (first-time only)
 cdk bootstrap
-cdk deploy
+
+# Deploy all stacks
+cdk deploy --all
 ```
+
+> [!CAUTION]
+> Change `RemovalPolicy.DESTROY` to `RemovalPolicy.RETAIN` in `database_stack.py` before any real flight deployment to prevent accidental deletion of flight logs.
 
 ---
 
