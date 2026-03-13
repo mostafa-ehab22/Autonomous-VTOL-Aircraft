@@ -307,11 +307,13 @@ cdk deploy --all
 <div align="center">
 
 | Document | Description |
-|---|---|
-| `docs/AWS_VTOL.drawio` | **Editable Source** for cloud architecture diagram |
-| `docs/cloud_architecture.png` | AWS cloud architecture diagram |
-| `docs/onboard_architecture.jpeg` | Full onboard system flowchart |
-| `docs/integration_guide.md` | How MAVLink telemetry flows into AWS IoT Core |
+| :--- | :--- |
+| 🏗️ [Editable Architecture Source](docs/AWS_VTOL.drawio) | `.drawio` source for all system diagrams |
+| 🌥️ [Cloud Extension Diagram](docs/cloud_architecture.png) | AWS serverless backend architecture |
+| ✈️ [Onboard System Flowchart](docs/onboard_architecture.jpeg) | Embedded flight control & logic pipeline |
+| 🌉 [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
+
+</div>
 
 </div>
 
