@@ -20,7 +20,7 @@ The system lives in two separate parts:
 
 </div>
 
-> [!NOTE]
+> [!IMPORTANT]
 The two parts are **independent by design**. Enabling **horizontal scaling** with **no code modifications**.
 > - Onboard system handles everything **time-critical**.
 > - Cloud handles everything **cognitive**. <br>
@@ -104,7 +104,7 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - 📡 **Mass Device Sync ```(AWS IoT Core)```:** Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
 - 🌍 **Global Replication ```(AWS CDK)```:** Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
 
-> [!IMPORTANT]
+> [!NOTE]
 > **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
 
 ## 🔍 Architectural Impact
