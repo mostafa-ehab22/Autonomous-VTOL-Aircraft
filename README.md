@@ -318,6 +318,10 @@ cdk deploy --all
 
 This is an active project. Issues and suggestions are welcome - feel free to open an issue for discussion.
 
+## ⚖️ License
+
+Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more information.
+
 ---
 
 <div align="center">
