@@ -249,10 +249,11 @@ AUTONOMOUS-VTOL-AIRCRAFT/
 │   ├── app.py                     # CDK Entry Point
 │   ├── cdk.json                   
 │   └── requirements.txt           
-├── 📖 docs/                       
+├── 📖 docs/
+│   ├── src/
+│   │   └── AWS_VTOL.drawio        # Editable Architecture Source                      
 │   ├── cloud_architecture.png     
 │   └── onboard_architecture.jpeg  
-├── AWS_VTOL.drawio                # Editable Architecture Source
 └── README.md
 ```
 
