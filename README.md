@@ -202,7 +202,7 @@ Safety Check → UNSAFE
 → END
 ```
 
-⚠️ Cloud Failsafe Path (Infrastructure Error):
+⚠️ **Cloud Failsafe Path (Infrastructure Error):**
 ```
 Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 → Execute Failsafe (Trigger RTL Command)
@@ -211,7 +211,9 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 → END
 ```
 
-> The Wait State uses Step Functions' `.waitForTaskToken` callback pattern. The task token is embedded in the command sent to the VTOL. The VTOL acknowledges via MQTT → IoT Rule → `SendTaskSuccess` to resume execution.
+> The Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
+> The task token is embedded in the command sent to the VTOL. <br>
+> The VTOL acknowledges via MQTT → IoT Rule → `SendTaskSuccess` to resume execution.
 
 ## 🌉 Integration: How Onboard Meets Cloud
 
@@ -253,7 +255,7 @@ cdk deploy
 
 ---
 
-# 🗺️ Roadmap
+# 🗺️ Roadmap 
 
 ### Onboard System
 - [x] YOLO11 model training on Roboflow dataset
