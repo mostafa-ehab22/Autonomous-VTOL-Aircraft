@@ -98,11 +98,11 @@ By moving cognitive logic to the cloud, the Pi is freed up to do what it does be
 
 Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
 
-- 🔀 **Stateless Concurrency *(Step Functions & Lambda)*:** Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
-- 🛡️ **Spike Absorption *(Amazon SQS)*:** Acts as a buffer for network reconnections, absorbing sudden telemetry dumps and feeding the pipeline at a controlled rate.
-- 🧠 **Elastic AI *(Amazon Bedrock)*:** Dynamically scales to process concurrent LLM safety classifications in the cloud, eliminating the latency of edge-device queuing.
-- 📡 **Mass Device Sync *(AWS IoT Core)*:** Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
-- 🌍 **Global Replication *(AWS CDK)*:** Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
+- 🔀 **Stateless Concurrency ```(Step Functions & Lambda)```:** Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
+- 🛡️ **Spike Absorption ```(Amazon SQS)```:** Acts as a buffer for network reconnections, absorbing sudden telemetry dumps and feeding the pipeline at a controlled rate.
+- 🧠 **Elastic AI ```(Amazon Bedrock)```:** Dynamically scales to process concurrent LLM safety classifications in the cloud, eliminating the latency of edge-device queuing.
+- 📡 **Mass Device Sync ```(AWS IoT Core)```:** Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
+- 🌍 **Global Replication ```(AWS CDK)```:** Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
 
 > [!IMPORTANT]
 > **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
