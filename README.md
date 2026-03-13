@@ -94,19 +94,6 @@ By moving cognitive logic to the cloud, the Pi is freed up to do what it does be
 
 </div>
 
-## 🚀 Scaling to a Fleet (1,000+ VTOLs)
-
-Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
-
-- 🔀 **Stateless Concurrency ```(Step Functions & Lambda)```:** Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
-- 🛡️ **Spike Absorption ```(Amazon SQS)```:** Acts as a buffer for network reconnections, absorbing sudden telemetry dumps and feeding the pipeline at a controlled rate.
-- 🧠 **Elastic AI ```(Amazon Bedrock)```:** Dynamically scales to process concurrent LLM safety classifications in the cloud, eliminating the latency of edge-device queuing.
-- 📡 **Mass Device Sync ```(AWS IoT Core)```:** Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
-- 🌍 **Global Replication ```(AWS CDK)```:** Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
-
-> [!NOTE]
-> **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
-
 ## 🔍 Architectural Impact
 
 This isn't just a compute offload: every responsibility moved to the cloud directly eliminates a real in-flight failure mode that could compromise the mission, corrupt critical data, or worse, endanger the aircraft itself:
@@ -122,30 +109,6 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 | **Silent Failures:** Only the local GCS sees safety alerts | 🔔 **SNS (Mobile/Email)** | Instant push notifications to all stakeholders on any safety breach, from anywhere |
 
 </div>
-
-## 🧱 AWS Cloud Architecture
-
-### 📡 Ingestion & Queuing
-- **AWS IoT Core** → MQTT ingestion point, Device Shadow for offline sync
-- **Amazon SQS** → Mission message queue with Dead Letter Queue after 3 failed retries
-- **EventBridge Pipes** → Serverless trigger from SQS to Step Functions
-
-### ⚙️ Orchestration & Intelligence
-- **AWS Step Functions** → Orchestrates the full mission workflow state machine
-- **Amazon Bedrock** → LLM-powered mission decision making (Safe / Unsafe classification)
-- **AWS Lambda** → Data normalization, command dispatch, mission continuation
-- **Amazon DynamoDB** → Mission state logs and event history
-
-### 🔔 Alerting & Feedback
-- **Amazon SNS** → Dual-topic alerting: Mission Log Topic (safe) and Alert Topic (unsafe)
-- **Device Shadow** → Bidirectional state sync between cloud and VTOL (offline-resilient)
-- **Amazon S3** → Long-term telemetry archive (Glacier lifecycle)
-
-### 👀 Observability & Security
-- **Amazon CloudWatch** → Monitoring and logs
-- **AWS CloudTrail** → API call audit logs
-- **AWS X-Ray** → End-to-end distributed tracing
-- **IAM** → Least-privilege access control across all services
 
 ## 💰 Cost Analysis
 
@@ -182,6 +145,43 @@ To maintain this efficiency, the following optimizations are implemented:
 1. 🧠 **Model Selection:** Using **Amazon Nova Lite** over Claude 3.5 Sonnet reduces inference cost by ~90% while maintaining sufficient reasoning for safety classification
 2. 📡 **Basic Ingest:** Telemetry that doesn't require the Message Broker is routed via **Basic Ingest** to eliminate 100% of the IoT Core messaging fee
 3. 🗑️ **Log Retention:** CloudWatch logs configured with a **7-day expiration** to prevent storage costs from accumulating over time
+
+## 🚀 Scaling to a Fleet (1,000+ VTOLs)
+
+Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
+
+- 🔀 **Stateless Concurrency ```(Step Functions & Lambda)```:** Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
+- 🛡️ **Spike Absorption ```(Amazon SQS)```:** Acts as a buffer for network reconnections, absorbing sudden telemetry dumps and feeding the pipeline at a controlled rate.
+- 🧠 **Elastic AI ```(Amazon Bedrock)```:** Dynamically scales to process concurrent LLM safety classifications in the cloud, eliminating the latency of edge-device queuing.
+- 📡 **Mass Device Sync ```(AWS IoT Core)```:** Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
+- 🌍 **Global Replication ```(AWS CDK)```:** Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
+
+> [!NOTE]
+> **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
+
+## 🧱 AWS Cloud Architecture
+
+### 📡 Ingestion & Queuing
+- **AWS IoT Core** → MQTT ingestion point, Device Shadow for offline sync
+- **Amazon SQS** → Mission message queue with Dead Letter Queue after 3 failed retries
+- **EventBridge Pipes** → Serverless trigger from SQS to Step Functions
+
+### ⚙️ Orchestration & Intelligence
+- **AWS Step Functions** → Orchestrates the full mission workflow state machine
+- **Amazon Bedrock** → LLM-powered mission decision making (Safe / Unsafe classification)
+- **AWS Lambda** → Data normalization, command dispatch, mission continuation
+- **Amazon DynamoDB** → Mission state logs and event history
+
+### 🔔 Alerting & Feedback
+- **Amazon SNS** → Dual-topic alerting: Mission Log Topic (safe) and Alert Topic (unsafe)
+- **Device Shadow** → Bidirectional state sync between cloud and VTOL (offline-resilient)
+- **Amazon S3** → Long-term telemetry archive (Glacier lifecycle)
+
+### 👀 Observability & Security
+- **Amazon CloudWatch** → Monitoring and logs
+- **AWS CloudTrail** → API call audit logs
+- **AWS X-Ray** → End-to-end distributed tracing
+- **IAM** → Least-privilege access control across all services
 
 ## 🔄 Mission Workflow Detail
 
