@@ -154,8 +154,9 @@ the cost is **$0.00**.
 
 ### 📉 Estimated Cost per Flight
 The total cost for a single mission execution (**Cost<sub>Total</sub>**) is the sum of its serverless components:
-
+  
 **Cost<sub>Total</sub>** = **C<sub>IoT</sub>** + **C<sub>Lambda</sub>** + **C<sub>Bedrock</sub>** + **C<sub>StepFunctions</sub>** + **C<sub>SNS</sub>** + **C<sub>DB</sub>**
+
 
 <div align="center">
 
@@ -293,7 +294,7 @@ cdk deploy --all
 - [ ] Hardware integration on Pixhawk + Raspberry Pi
 
 ### Cloud Extension
-- [ ] AWS CDK infrastructure stack
+- [x] AWS CDK infrastructure stack
 - [ ] Lambda functions (normalization, command, continuation)
 - [ ] Step Functions state machine definition
 - [ ] Bedrock prompt engineering for safety classification
