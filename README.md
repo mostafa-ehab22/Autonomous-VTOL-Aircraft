@@ -237,8 +237,9 @@ AWS IoT Core
     └─► Device Shadow ← Command Lambda (mission updates back to VTOL)
 ```
 
-> [!NOTE]
-ROS2 MAVLink bridge node publishes telemetry to IoT Core and subscribes to Device Shadow delta updates: allowing cloud-originated commands *(e.g., abort, reroute)* to flow back down to the VTOL seamlessly.
+> [!TIP]
+> ROS2 MAVLink bridge node handles **bidirectional flow**: publishing telemetry upstream to IoT Core, and receiving cloud-originated commands *(abort, reroute)* back down to VTOL via Device Shadow delta updates.
+> 📖 See the full [Integration Guide](docs/integration_guide.md) here.
 
 ## 📂 Project Structure
 ```
