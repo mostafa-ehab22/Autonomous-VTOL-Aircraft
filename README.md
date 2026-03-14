@@ -154,7 +154,7 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - 🛡️ **Spike Absorption ```(Amazon SQS)```:** <br> Acts as a buffer for network reconnections, absorbing sudden telemetry dumps and feeding the pipeline at a controlled rate.
 - 🧠 **Elastic AI ```(Amazon Bedrock)```:** <br> Dynamically scales to process concurrent LLM safety classifications in the cloud, eliminating the latency of edge-device queuing.
 - 📡 **Mass Device Sync ```(AWS IoT Core)```:** <br> Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
-- 🌍 **Global Replication ```(AWS CDK)```:** <br> Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region to minimize latency.
+- 🌍 **Global Replication ```(AWS CDK)```:** <br> Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region.
 
 > [!NOTE]
 > **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
