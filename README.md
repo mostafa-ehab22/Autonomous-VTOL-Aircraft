@@ -218,6 +218,25 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 > The task token is embedded in the command sent to the VTOL. <br>
 > The VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
+## 📂 Project Structure
+```
+AUTONOMOUS-VTOL-AIRCRAFT/
+├── 🌥️ cloud_infrastructure/       # AWS CDK Serverless Backend
+│   ├── cloud_infrastructure/
+│   │   ├── database_stack.py      # DynamoDB Flight Logs
+│   │   └── messaging_stack.py     # SQS Mission Queue + DLQ
+│   ├── app.py                     # CDK Entry Point
+│   ├── cdk.json                   
+│   └── requirements.txt           
+├── 📖 docs/
+│   ├── AWS_VTOL.drawio            # Editable Architecture Source                          
+│   ├── cloud_architecture.png     
+│   └── onboard_architecture.jpeg
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+
 ## 🌉 Integration: How Onboard Meets Cloud
 
 The bridge between the two systems is a single well-defined interface:
@@ -239,25 +258,6 @@ AWS IoT Core
 
 > [!NOTE]
 ROS2 MAVLink bridge node publishes telemetry to IoT Core and subscribes to Device Shadow delta updates: allowing cloud-originated commands *(e.g., abort, reroute)* to flow back down to the VTOL seamlessly.
-
-## 📂 Project Structure
-```
-AUTONOMOUS-VTOL-AIRCRAFT/
-├── 🌥️ cloud_infrastructure/       # AWS CDK Serverless Backend
-│   ├── cloud_infrastructure/
-│   │   ├── database_stack.py      # DynamoDB Flight Logs
-│   │   └── messaging_stack.py     # SQS Mission Queue + DLQ
-│   ├── app.py                     # CDK Entry Point
-│   ├── cdk.json                   
-│   └── requirements.txt           
-├── 📖 docs/
-│   ├── AWS_VTOL.drawio            # Editable Architecture Source                          
-│   ├── cloud_architecture.png     
-│   └── onboard_architecture.jpeg
-├── .gitignore
-├── LICENSE
-└── README.md
-```
 
 ## 🚀 Deployment
 
