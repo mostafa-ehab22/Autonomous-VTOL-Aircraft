@@ -156,7 +156,7 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - 📡 **Mass Device Sync ```(AWS IoT Core)```:** <br> Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
 - 🌍 **Global Replication ```(AWS CDK)```:** <br> Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region.
 
-> [!NOTE]
+> [!IMPORTANT]
 > **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
 
 ## 🧱 AWS Cloud Architecture
@@ -216,7 +216,7 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 > [!NOTE]
 > The Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
 > The task token is embedded in the command sent to the VTOL. <br>
-> The VTOL acknowledges via MQTT → IoT Rule → `SendTaskSuccess` to resume execution.
+> The VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
 ## 🌉 Integration: How Onboard Meets Cloud
 
@@ -237,6 +237,7 @@ AWS IoT Core
     └─► Device Shadow ← Command Lambda (mission updates back to VTOL)
 ```
 
+> [!NOTE]
 The ROS2 MAVLink bridge node publishes telemetry to IoT Core and subscribes to Device Shadow delta updates: allowing cloud-originated commands (e.g., abort, reroute) to flow back down to the VTOL seamlessly.
 
 ## 📂 Project Structure
