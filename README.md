@@ -214,8 +214,10 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 ```
 
 > [!NOTE]
-> The Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
-> The task token is embedded in the command sent to the VTOL. <br>
+> The Wait State uses Step Functions' `.waitForTaskToken` callback pattern.
+>
+> The task token is embedded in the command sent to the VTOL.
+>
 > The VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
 ## 🌉 Integration: How Onboard Meets Cloud
