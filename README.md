@@ -78,7 +78,7 @@ Physical flight hardware has strict operational limits. Originally, the Raspberr
 This created a massive compute burden, increasing the risk of thermal throttling or process crashes mid-flight.
 
 > [!NOTE]
-> By moving cognitive logic to the cloud, the Raspberry Pi is freed up to do what it does best:
+> *By moving cognitive logic to the cloud, the Raspberry Pi is freed up to do what it does best:*
 > - **Pi:** Real-time YOLO11 inference, ROS2 coordination & safety-critical failsafes.
 > - **Cloud:** Mission decisions, state logging, pilot alerting & message reliability.
 
