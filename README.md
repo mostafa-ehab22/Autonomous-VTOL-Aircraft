@@ -192,10 +192,10 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 <div align="center">
   
 | | Bedrock | SageMaker Serverless |
-|---|---|---|
-| **Deployment** | Managed API with zero pipeline setup | Requires custom model weights & container management |
-| **Cold-Start** | Bypassed via managed endpoint | Inherent latency risk for time-critical safety audits |
-| **Model Access** | Immediate access to Nova / Claude FMs | Custom training pipeline required |
+|---|:---:|:---:|
+| **🚀 Deployment** | Managed API with zero pipeline setup | Requires custom model weights & container management |
+| **❄️ Cold-Start** | Bypassed via managed endpoint | Inherent latency risk for time-critical safety audits |
+| **🧠 Model Access** | Immediate access to Nova / Claude FMs | Custom training pipeline required |
 
 </div>
 
@@ -223,7 +223,7 @@ Bedrock acts as a **Strategic Safety Classifier** at the cloud decision layer.
 ```json
 {
   "verdict":    "Continue | Abort",
-  "confidence": 0.0 | 1.0
+  "confidence":  0.8
 }
 ```
 
@@ -233,7 +233,7 @@ Bedrock acts as a **Strategic Safety Classifier** at the cloud decision layer.
 > - **Low Confidence:** Any verdict with confidence `< 0.75` is automatically treated as `Abort` by the ROS 2 controller.
 > - **Cloud Timeout:** If no verdict is received within `3 seconds`, the ROS 2 controller triggers local **RTL** independently.
 >
-> Aircraft safety is **never held hostage to network availability.**
+> *Aircraft safety is **never held hostage to network availability.***
 
 ## 🔄 Mission Workflow Detail
 
