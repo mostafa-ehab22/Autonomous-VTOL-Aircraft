@@ -201,7 +201,7 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 
 ### 💰 Cost & Simplicity
 
-- **$0.00 idle cost** — pure "Pay-as-you-fly" billing model
+- **$0.00 idle cost**: pure **"Pay-as-you-fly"** billing model
 - No containerized inference logic to maintain
 - No model artifact versioning overhead
 - Team focus stays on **mission integration**, not infrastructure
