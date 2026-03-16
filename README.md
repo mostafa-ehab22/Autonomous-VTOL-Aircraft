@@ -225,12 +225,10 @@ Bedrock acts as a **Strategic Safety Classifier** at the cloud decision layer.
 ```
 
 > [!WARNING]
-> ### ⚠️ Failsafe Rules: Safety-First by Default
+> ### Failsafe Rules - Safety-First by Default
 >
-> | Trigger | Condition | Response |
-> |---|---|---|
-> | **Low Confidence** | Verdict confidence `< 0.75` | Treated as `Abort` by ROS 2 controller |
-> | **Cloud Timeout** | No verdict within `3 seconds` | ROS 2 triggers local **RTL** independently |
+> - **Low Confidence:** Any verdict with confidence `< 0.75` is automatically treated as `Abort` by the ROS 2 controller.
+> - **Cloud Timeout:** If no verdict is received within `3 seconds`, the ROS 2 controller triggers local **RTL** independently.
 >
 > Aircraft safety is **never held hostage to network availability.**
 
