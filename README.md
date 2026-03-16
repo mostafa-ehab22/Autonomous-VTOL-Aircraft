@@ -183,7 +183,7 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - **AWS X-Ray** → End-to-end distributed tracing
 - **IAM** → Least-privilege access control across all services
 
-## 🧠 AI Selection & Strategy: Bedrock vs. Sagemaker?
+## 🧠 AI Selection: Bedrock vs. Sagemaker
 
 While SageMaker (including Serverless Inference) was evaluated, Amazon Bedrock was selected as the strategic choice for the following reasons:
 
