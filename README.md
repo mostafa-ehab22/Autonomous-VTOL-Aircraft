@@ -73,20 +73,20 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🎯 Why a Cloud Extension?
 
-Physical flight hardware has strict operational limits. Originally, the Raspberry Pi was responsible for mission logic, state management, data logging, AND running ROS2 + high-framerate YOLO11 simultaneously. 
+The Cloud Extension was architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system — without touching the onboard flight stack.
 
-This created a massive compute burden, increasing the risk of thermal throttling or process crashes mid-flight.
+By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, the aircraft's "reflexes" remain local and deterministic, while its "decisions" benefit from LLM-level reasoning, durable state persistence, and fleet-scale orchestration.
 
 > [!NOTE]
-> *By moving cognitive logic to the cloud, the Raspberry Pi is freed up to do what it does best:*
-> - **Pi:** Real-time YOLO11 inference, ROS2 coordination & safety-critical failsafes.
-> - **Cloud:** Mission decisions, state logging, pilot alerting & message reliability.
+> **The Functional Split:**
+> * ✈️ **Onboard (The Reflexes):** Time-critical YOLO11 inference, deterministic ROS2 coordination, and low-latency flight safety.
+> * 🌥️ **Cloud (The Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
 
 <div align="center">
 
 | Responsibility | Before (Pi Only) | After (Cloud Extension) |
 |---|:---:|:---:|
-| 🧠 Mission decision making | Python scripts on Pi | **AWS Bedrock (AI)** |
+| 🧠 Strategic mission reasoning | Static rule-based logic | **AWS Bedrock (AI)** |
 | 📋 State & mission logging | Local files / SQLite | **DynamoDB** |
 | 🔔 Pilot notifications | Ground Control Station only | **SNS (Mobile/Email)** |
 | 🔄 Mission state management | In-memory / local | **Device Shadow (with offline sync)** |
@@ -102,11 +102,11 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 
 | 🚫 Limitation (Pi Only) | 🌩️ Cloud Upgrade | 🎯 Architectural Impact |
 |---|:---:|---|
-| **Static Logic:** Mission decisions are hardcoded Python scripts | 🧠 **Amazon Bedrock** | The aircraft gets a dynamic AI brain for complex, edge-case safety classification |
-| **Local SD Logging:** Flight logs corrupt or die with the drone in a crash | 🗄️ **Amazon DynamoDB** | Logs stream instantly to a highly available database → data survives physical destruction |
-| **Dropped Telemetry:** Network drops cause lost commands with no retry | 📨 **SQS + Dead Letter Queue** | Failed telemetry is held and retried automatically → zero commands silently dropped |
-| **Local State Only:** A mid-air reboot causes the drone to forget its mission | 🪞 **AWS IoT Device Shadow** | The cloud maintains a perfect virtual copy → reconnections instantly restore mission state |
-| **Silent Failures:** Only the local GCS sees safety alerts | 🔔 **SNS (Mobile/Email)** | Instant push notifications to all stakeholders on any safety breach, from anywhere |
+| **No Strategic Reasoning:** Safety classification relied on static rules | 🧠 **Amazon Bedrock** | Dynamic AI layer for adaptive, edge-case safety classification |
+| **Local SD Logging:** Flight logs corrupt or lost on crash | 🗄️ **Amazon DynamoDB** | Logs stream to a highly available database → data survives physical destruction |
+| **Dropped Telemetry:** Network drops cause lost commands with no retry | 📨 **SQS + Dead Letter Queue** | Failed telemetry retried automatically → zero commands silently dropped |
+| **Local State Only:** Mid-air reboot causes the drone to forget its mission | 🪞 **AWS IoT Device Shadow** | Cloud maintains a virtual copy → reconnections instantly restore mission state |
+| **Silent Failures:** Safety alerts visible only on local GCS | 🔔 **SNS (Mobile/Email)** | Instant push notifications to all stakeholders on any safety breach |
 
 </div>
 
