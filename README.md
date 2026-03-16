@@ -183,6 +183,46 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - **AWS X-Ray** → End-to-end distributed tracing
 - **IAM** → Least-privilege access control across all services
 
+## 🧠 AI Selection & Strategy: Why Bedrock?
+
+While SageMaker (including Serverless Inference) was evaluated, Amazon Bedrock was selected as the strategic choice for the following reasons:
+
+- **Foundation vs. Custom:** Bedrock provides immediate access to high-reasoning LLMs (Nova/Claude) without a custom training pipeline. SageMaker Serverless would still require managing custom model weights and cold-start latency for a problem Bedrock solves via a simple API call.
+- **Cost & Simplicity:** Bedrock maintains a **$0.00 idle cost** and eliminates containerized inference logic, allowing the team to focus on mission integration rather than endpoint management.
+- **I/O Contract:** Bedrock acts as a **Strategic Safety Classifier**. It receives structured telemetry `(altitude, battery, motor_load)` and returns a JSON response containing a binary **Mission Verdict** `(Continue | Abort)` and a **Confidence Value** `(0.0–1.0)`. Low-confidence verdicts below a defined threshold (`< 0.75`) are treated as Abort by default.
+
+> [!IMPORTANT]
+> **Safety Boundary:** A **3-second timeout** is enforced on all cloud calls. If no verdict is received within this window, the onboard ROS2 controller triggers a local failsafe **(RTL)** independently — the aircraft's safety is never held hostage to network availability.
+
+---
+
+## 🔮 Evolution Roadmap: Intelligent Edge
+
+The architecture follows a three-generation evolution to progressively reduce cloud dependency while preserving mission reasoning capability:
+
+<div align="center">
+
+| | 🔵 Gen 1 *(Current)* | 🟡 Gen 2 | 🟢 Gen 3 |
+|---|:---:|:---:|:---:|
+| 🧠 **AI Location** | Cloud-Native LLM | Hybrid (TFLite + Cloud) | Fully Autonomous Edge |
+| ⚡ **Latency** | Network-dependent | Reduced | Near-zero |
+| 📡 **Connectivity** | Required | Optional | Independent |
+| 🛠️ **Key Tech** | Amazon Bedrock | TFLite / ONNX Runtime + Bedrock | Quantized Edge Models + S3 OTA |
+
+</div>
+
+**🔵 Gen 1 — Strategic Cloud Logic** *(Current)*  
+The cloud handles all high-level safety audits via Bedrock. Onboard, the Pi runs full-framerate YOLO11 inference and ROS2 coordination. The 3-second timeout + RTL fallback ensures no single point of failure in the cloud path.
+
+**🟡 Gen 2 — Quantized Local Inference**  
+The existing YOLO11 detection pipeline is optimized via **Post-Training Quantization (PTQ)** and compiled to **TFLite / ONNX Runtime on the RPi ARM CPU (XNNPACK delegate)**. This reduces inference latency for time-sensitive perception tasks, lowering dependence on cloud round-trips. Bedrock is retained for complex strategic reasoning only.
+
+**🟢 Gen 3 — Full Edge Autonomy**  
+All mission decision-making migrates to the edge. Model freshness is maintained via **S3-to-Pi OTA weight synchronization**, pushing updated models after offline retraining on accumulated mission logs — no cloud dependency required at flight time.
+
+> [!IMPORTANT]
+> The serverless architecture is intentionally designed to support this evolution. The onboard/cloud separation boundary makes swapping or augmenting the AI layer in any generation straightforward without restructuring the pipeline.
+
 ## 🔄 Mission Workflow Detail
 
 **✅ Safe Path:**
