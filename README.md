@@ -184,7 +184,7 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 
 ## 🧠 AI Selection: Bedrock vs. SageMaker
 
-While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the strategic choice for the following reasons:
+While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the **Strategic Safety Classifier** at the cloud decision layer for the following reasons:
 
 ### 🏗️ Foundation vs. Custom
 
@@ -206,8 +206,6 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 - Team focus stays on **mission integration**, not infrastructure
 
 ### 📋 I/O Contract (JSON Schema)
-
-Bedrock acts as a **Strategic Safety Classifier** at the cloud decision layer.
 
 **Input - Structured Telemetry:**
 ```json
