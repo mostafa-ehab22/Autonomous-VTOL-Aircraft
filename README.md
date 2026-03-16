@@ -223,7 +223,7 @@ Bedrock acts as a **Strategic Safety Classifier** at the cloud decision layer.
 ```json
 {
   "verdict":    "Continue | Abort",
-  "confidence": 0.0 – 1.0
+  "confidence": 0.0 | 1.0
 }
 ```
 
