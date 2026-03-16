@@ -193,9 +193,9 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
   
 | | Bedrock | SageMaker Serverless |
 |---|:---:|:---:|
-| **🚀 Deployment** | Managed API with zero pipeline setup | Requires custom model weights & container management |
-| **❄️ Cold-Start** | Bypassed via managed endpoint | Inherent latency risk for time-critical safety audits |
-| **🧠 Model Access** | Immediate access to Nova / Claude FMs | Custom training pipeline required |
+| 🚀 **Deployment** | Managed API with zero pipeline setup | Requires custom model weights & container management |
+| ❄️ **Cold-Start** | Bypassed via managed endpoint | Inherent latency risk for time-critical safety audits |
+| 🧠 **Access** | Immediate access to Nova / Claude FMs | Custom training pipeline required |
 
 </div>
 
