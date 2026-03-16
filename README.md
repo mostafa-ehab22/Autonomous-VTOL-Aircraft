@@ -73,7 +73,7 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🎯 Why a Cloud Extension?
 
-The Cloud Extension was architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system - without touching the onboard flight stack.
+The Cloud Extension was architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system without touching the onboard flight stack.
 
 By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, the aircraft's "reflexes" remain local and deterministic, while its "decisions" benefit from LLM-level reasoning, durable state persistence, and fleet-scale orchestration.
 
