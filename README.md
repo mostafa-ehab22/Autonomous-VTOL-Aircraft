@@ -183,22 +183,9 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - **AWS X-Ray** → End-to-end distributed tracing
 - **IAM** → Least-privilege access control across all services
 
-## 🧠 AI Selection: Bedrock vs. Sagemaker
-
-While SageMaker (including Serverless Inference) was evaluated, Amazon Bedrock was selected as the strategic choice for the following reasons:
-
-* 🏗️ **Foundation vs. Custom**  
-Bedrock provides immediate access to high-reasoning LLMs (Nova/Claude) without a custom training pipeline. SageMaker Serverless would still require managing custom model weights and cold-start latency for a problem Bedrock solves via a simple API call.
-* 💰 **Cost & Simplicity**  
-Bedrock maintains a **$0.00 idle cost** and eliminates containerized inference logic, allowing the team to focus on mission integration rather than endpoint management.
-* 📋 **I/O Contract**  
-Bedrock acts as a **Strategic Safety Classifier**. It receives structured telemetry `(altitude, battery, motor_load)` and returns a JSON response containing a binary **Mission Verdict** `(Continue | Abort)` and a **Confidence Value** `(0.0–1.0)`. Low-confidence verdicts below a defined threshold `(< 0.75)` are treated as Abort by default.
-
 ## 🧠 AI Selection: Bedrock vs. SageMaker
 
-While SageMaker (including Serverless Inference) was evaluated, Amazon Bedrock was selected as the strategic choice for the following reasons:
-
----
+While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the strategic choice for the following reasons:
 
 ### 🏗️ Foundation vs. Custom
 
@@ -208,7 +195,6 @@ While SageMaker (including Serverless Inference) was evaluated, Amazon Bedrock w
 | **Cold-Start** | Bypassed via managed endpoint | Inherent latency risk for time-critical safety audits |
 | **Model Access** | Immediate access to Nova / Claude FMs | Custom training pipeline required |
 
----
 
 ### 💰 Cost & Simplicity
 
