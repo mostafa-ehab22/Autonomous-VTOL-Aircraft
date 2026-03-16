@@ -1,4 +1,4 @@
-## 🎯 Project Overview
+# 🎯 Project Overview
 ![AWS](https://img.shields.io/badge/⛅_AWS-232F3E)
 ![RaspberryPi](https://img.shields.io/badge/Raspberry_Pi-A22846?logo=raspberrypi)
 ![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
@@ -194,10 +194,8 @@ While SageMaker (including Serverless Inference) was evaluated, Amazon Bedrock w
 * 📋 **I/O Contract**  
   Bedrock acts as a **Strategic Safety Classifier**. It receives structured telemetry `(altitude, battery, motor_load)` and returns a JSON response containing a binary **Mission Verdict** `(Continue | Abort)` and a **Confidence Value** `(0.0–1.0)`. Low-confidence verdicts below a defined threshold `(< 0.75)` are treated as Abort by default.
 
-> [!IMPORTANT]
+> [!NOTE]
 > **Safety Boundary:** A **3-second timeout** is enforced on all cloud calls. If no verdict is received within this window, the onboard ROS2 controller triggers a local failsafe **(RTL)** independently. Aircraft's safety is never held hostage to network availability.
-
----
 
 ## 🔮 Evolution Roadmap: Intelligent Edge
 
@@ -214,16 +212,16 @@ The architecture follows a three-generation evolution to progressively reduce cl
 
 </div>
 
-**🔵 Gen 1: Strategic Cloud Logic** *(Current)*  
+### 🔵 Gen 1 - Strategic Cloud Logic *(Current)*
 The cloud handles all high-level safety audits via Bedrock. Onboard, the Pi runs full-framerate YOLO11 inference and ROS2 coordination. The 3-second timeout + RTL fallback ensures no single point of failure in the cloud path.
 
-**🟡 Gen 2: Quantized Local Inference**  
+### 🟡 Gen 2 - Quantized Local Inference
 The existing YOLO11 detection pipeline is optimized via **Post-Training Quantization (PTQ)** and compiled to **TFLite / ONNX Runtime** on the RPi ARM CPU `(XNNPACK delegate)`. This reduces inference latency for time-sensitive perception tasks, lowering dependence on cloud round-trips. Bedrock is retained for complex strategic reasoning only.
 
-**🟢 Gen 3: Full Edge Autonomy**  
+### 🟢 Gen 3 - Full Edge Autonomy
 All mission decision-making migrates to the edge. Model freshness is maintained via **S3-to-Pi OTA weight synchronization**, pushing updated models after offline retraining on accumulated mission logs — no cloud dependency required at flight time.
 
-> [!NOTE]
+> [!IMPORTANT]
 > The serverless architecture is intentionally designed to support this evolution. The onboard/cloud separation boundary makes swapping or augmenting the AI layer in any generation straightforward without restructuring the pipeline.
 
 ## 🔄 Mission Workflow Detail
