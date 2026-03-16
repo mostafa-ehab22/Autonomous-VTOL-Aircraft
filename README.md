@@ -194,8 +194,59 @@ Bedrock maintains a **$0.00 idle cost** and eliminates containerized inference l
 * 📋 **I/O Contract**  
 Bedrock acts as a **Strategic Safety Classifier**. It receives structured telemetry `(altitude, battery, motor_load)` and returns a JSON response containing a binary **Mission Verdict** `(Continue | Abort)` and a **Confidence Value** `(0.0–1.0)`. Low-confidence verdicts below a defined threshold `(< 0.75)` are treated as Abort by default.
 
-> [!IMPORTANT]
-> **Safety Boundary:** A **3-second timeout** is enforced on all cloud calls. If no verdict is received within this window, the onboard ROS2 controller triggers a local failsafe **(RTL)** independently. Aircraft's safety is never held hostage to network availability.
+## 🧠 AI Selection: Bedrock vs. SageMaker
+
+While SageMaker (including Serverless Inference) was evaluated, Amazon Bedrock was selected as the strategic choice for the following reasons:
+
+---
+
+### 🏗️ Foundation vs. Custom
+
+| | Bedrock | SageMaker Serverless |
+|---|---|---|
+| **Deployment** | Managed API with zero pipeline setup | Requires custom model weights & container management |
+| **Cold-Start** | Bypassed via managed endpoint | Inherent latency risk for time-critical safety audits |
+| **Model Access** | Immediate access to Nova / Claude FMs | Custom training pipeline required |
+
+---
+
+### 💰 Cost & Simplicity
+
+- **$0.00 idle cost** — pure "Pay-as-you-fly" billing model
+- No containerized inference logic to maintain
+- No model artifact versioning overhead
+- Team focus stays on **mission integration**, not infrastructure
+
+### 📋 I/O Contract (JSON Schema)
+
+Bedrock acts as a **Strategic Safety Classifier** at the cloud decision layer.
+
+**Input - Structured Telemetry:**
+```json
+{
+  "altitude":    "<float>",
+  "battery":     "<float>",
+  "motor_load":  "<float>"
+}
+```
+
+**Output - Mission Verdict:**
+```json
+{
+  "verdict":    "Continue | Abort",
+  "confidence": 0.0 – 1.0
+}
+```
+
+> [!WARNING]
+> ### ⚠️ Failsafe Rules: Safety-First by Default
+>
+> | Trigger | Condition | Response |
+> |---|---|---|
+> | **Low Confidence** | Verdict confidence `< 0.75` | Treated as `Abort` by ROS 2 controller |
+> | **Cloud Timeout** | No verdict within `3 seconds` | ROS 2 triggers local **RTL** independently |
+>
+> Aircraft safety is **never held hostage to network availability.**
 
 ## 🔄 Mission Workflow Detail
 
