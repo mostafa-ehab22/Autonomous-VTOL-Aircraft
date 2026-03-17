@@ -226,7 +226,7 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 
 > [!WARNING]
 > ### Safety-First Failsafe Logic
-> Aircraft safety is **never held hostage to network availability:**
+> *Aircraft safety is **never held hostage to network availability:***
 > - **Low Confidence:** Verdict confidence `< 0.75` is automatically treated as `Abort` by ROS 2 controller.
 > - **Cloud Timeout:** No verdict is received within `3 seconds`, ROS 2 controller triggers local **RTL** independently.
 
