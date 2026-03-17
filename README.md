@@ -78,8 +78,8 @@ The Cloud Extension was architected to transition the aircraft from a standalone
 By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, the aircraft's "reflexes" remain local and deterministic, while its "decisions" benefit from LLM-level reasoning, durable state persistence, and fleet-scale orchestration.
 
 > [!NOTE]
-> * ✈️ **Onboard (The Reflexes):** Time-critical YOLO11 inference, deterministic ROS2 coordination, and low-latency flight safety.
-> * ⛅ **Cloud (The Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
+> **Onboard (The Reflexes):** Time-critical YOLO11 inference, deterministic ROS2 coordination, and low-latency flight safety.<br>
+> **Cloud (The Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
 
 <div align="center">
 
@@ -226,11 +226,9 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 
 > [!WARNING]
 > ### Safety-First Failsafe Logic
->
+> Aircraft safety is **never held hostage to network availability:**
 > - **Low Confidence:** Verdict confidence `< 0.75` is automatically treated as `Abort` by ROS 2 controller.
 > - **Cloud Timeout:** No verdict is received within `3 seconds`, ROS 2 controller triggers local **RTL** independently.
->
-> *Aircraft safety is **never held hostage to network availability.***
 
 ## 🔄 Mission Workflow Detail
 
