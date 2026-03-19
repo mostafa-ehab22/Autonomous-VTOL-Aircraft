@@ -253,7 +253,7 @@ OUTPUT CONSTRAINTS:
 {
   "verdict": "Abort",
   "confidence": 0.95,
-  "reasoning": "High wind (14.2 m/s) + visual anomaly exceed safety thresholds for current battery level."
+  "reasoning": "Compound risk: Anomaly detected + High wind (14.2m/s) at 42% battery."
 }
 ```
 
