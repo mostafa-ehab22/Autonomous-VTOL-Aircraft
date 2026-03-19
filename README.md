@@ -161,26 +161,26 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 ## 🧱 AWS Cloud Architecture
 
 ### 📡 Ingestion & Queuing
-- **AWS IoT Core** → MQTT ingestion point, Device Shadow for offline sync
-- **Amazon SQS** → Mission message queue with Dead Letter Queue after 3 failed retries
-- **EventBridge Pipes** → Serverless trigger from SQS to Step Functions
+- **AWS IoT Core** → Secure MQTT ingestion; Device Shadow for offline state sync
+- **Amazon SQS** → Telemetry buffer with Dead Letter Queue (DLQ) after 3 retries
+- **EventBridge Pipes** → Serverless SQS-to-Step Functions router (No intermediary Lambda)
 
 ### ⚙️ Orchestration & Intelligence
-- **AWS Step Functions** → Orchestrates the full mission workflow state machine
-- **Amazon Bedrock** → LLM-powered mission decision making (Safe / Unsafe classification)
-- **AWS Lambda** → Data normalization, command dispatch, mission continuation
-- **Amazon DynamoDB** → Mission state logs and event history
+- **AWS Step Functions** → Deterministic mission workflow with branching logic and async callbacks
+- **Amazon Bedrock** → LLM-powered strategic decision layer (Safe/Unsafe classification)
+- **AWS Lambda** → Payload normalization, command dispatch, and task token validation
+- **Amazon DynamoDB** → NoSQL persistence for immutable mission logs and event history
 
 ### 🔔 Alerting & Feedback
-- **Amazon SNS** → Dual-topic alerting: Mission Log Topic (safe) and Alert Topic (unsafe)
-- **Device Shadow** → Bidirectional state sync between cloud and VTOL (offline-resilient)
-- **Amazon S3** → Long-term telemetry archive (Glacier lifecycle)
+- **Amazon SNS** → Dual-topic push alerting: Mission Log (safe) vs. Alert (unsafe)
+- **AWS IoT Device Shadow** → Offline-resilient bidirectional sync; aborts execute on reconnection
+- **Amazon S3** → Long-term telemetry archive with Glacier lifecycle policies
 
 ### 👀 Observability & Security
-- **Amazon CloudWatch** → Monitoring and logs
-- **AWS CloudTrail** → API call audit logs
-- **AWS X-Ray** → End-to-end distributed tracing
-- **IAM** → Least-privilege access control across all services
+- **Amazon CloudWatch** → Centralized metrics, monitoring, and automated alarms
+- **AWS CloudTrail** → Immutable API audit logs for security and compliance
+- **AWS X-Ray** → Distributed tracing across the serverless pipeline
+- **AWS IAM** → Strict least-privilege access control across all services
 
 ## 🧠 AI Selection: Bedrock vs. SageMaker
 
@@ -205,22 +205,57 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 - No model artifact versioning overhead
 - Team focus stays on **mission integration**, not infrastructure
 
+### 🛡️ Bedrock System Prompt (Safety Classifier)
+
+This prompt forces the LLM to act as a strict, safety-biased evaluator. Injected directly at the Bedrock layer, it hardcodes the aircraft's physical flight limits and guarantees JSON-compliant output for Step Functions:
+
+```text
+You are the Strategic Safety Classifier for an autonomous VTOL aircraft. 
+Your ONLY job is to evaluate incoming flight telemetry and perception data,
+and output a strict JSON response determining if the mission should 'Continue' or 'Abort'.
+
+CRITICAL SAFETY RULES:
+1. If 'yolo_anomaly_detected' is true AND 'altitude_m' < 50, you MUST Abort.
+  (Rationale: Low-altitude anomalies present immediate collision risk).
+2. If 'battery_pct' < 20.0, you MUST Abort regardless of other factors.
+  (Rationale: Insufficient reserve for safe RTL).
+3. If 'wind_resistance_ms' > 15.0, you MUST Abort.
+  (Rationale: Exceeds stable flight envelope).
+4. If the data is ambiguous or conflicting, default to Abort to ensure physical safety.
+
+OUTPUT CONSTRAINTS:
+- You must respond ONLY with valid, unformatted JSON.
+- Do not include markdown tags (```json), conversational text, or greetings.
+- Use the exact schema: {"verdict": "Continue" | "Abort", "confidence": float, "reasoning": "string"}
+```
+
 ### 📋 I/O Contract (JSON Schema)
 
 **Input - Structured Telemetry:**
 ```json
 {
-  "altitude":    "<float>",
-  "battery":     "<float>",
-  "motor_load":  "<float>"
+  "timestamp": "2026-03-19T15:34:55Z",
+  "telemetry": {
+    "altitude_m": 120.5,
+    "battery_pct": 42.1,
+    "wind_resistance_ms": 14.2,
+    "motor_temp_c": 65.0
+  },
+  "perception": {
+    "yolo_anomaly_detected": true,
+    "anomaly_confidence": 0.88
+  }
 }
 ```
 
 **Output - Mission Verdict:**
 ```json
 {
-  "verdict":    "Continue | Abort",
-  "confidence":  0.8
+  "verdict": "Abort",
+  "confidence": 0.95,
+  "reasoning":
+     "High wind resistance (14.2 m/s),
+     combined with visual anomaly detection exceeds safety thresholds for current battery level."
 }
 ```
 
@@ -260,7 +295,41 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 → Amazon SNS (Log Alert Topic — "AI Unreachable, RTL Initiated")
 → END
 ```
+## 🌊 End-to-End System Flow: The Life of a Telemetry Packet
 
+The complete lifecycle of a single mission decision — from raw sensor data to physical motor response:
+
+### 👁️ Sense (The Edge)
+- **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
+- **Pixhawk (ArduPilot)** simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
+
+### 📡 Package & Transmit (The Bridge)
+- The **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
+- Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core** — the single handoff point between edge and cloud.
+
+### 📥 Buffer & Trigger (The Cloud Entry)
+- IoT Core routes the payload into the **Amazon SQS Mission Queue**, absorbing any network reconnect spikes.
+- **EventBridge Pipes** polls the queue and triggers the **AWS Step Functions** state machine — no intermediary Lambda required.
+
+### 🧠 Reason & Decide (The Cloud Brain)
+- Step Functions invokes **Amazon Bedrock (Nova Lite)** with the telemetry JSON for safety classification.
+- Bedrock returns: `{"verdict": "Abort", "confidence": 0.92}`.
+- Since `confidence ≥ 0.75`, the verdict is trusted. Step Functions routes down the `UNSAFE` path.
+
+### 🚨 Alert & Command (The Cloud Exit)
+- **SNS** fires an immediate alert to the pilot's mobile/email.
+- A **Lambda** updates the **IoT Device Shadow** `desired` state to `RTL_TRIGGERED`, embedding a `.waitForTaskToken` — Step Functions pauses, waiting for physical confirmation from the aircraft.
+
+### ⚡ Act (The Edge Reflex)
+- The ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
+- Translates `RTL_TRIGGERED` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
+- The Pixhawk takes physical control and begins Return-to-Launch.
+
+### ✅ Acknowledge (The Loop Closes)
+- The ROS2 node publishes an MQTT ACK back to **IoT Core**.
+- An **IoT Rule** calls `SendTaskSuccess`, returning the task token to Step Functions.
+- The execution resumes, logs the confirmed abort to **DynamoDB**, and reaches `END`.
+  
 > [!NOTE]
 > The Wait State uses Step Functions' `.waitForTaskToken` callback pattern.
 >
