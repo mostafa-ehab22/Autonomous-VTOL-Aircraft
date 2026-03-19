@@ -316,7 +316,7 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 
 ### 🚨 Alert & Command (Cloud Exit)
 - **SNS** fires an immediate alert to the pilot's mobile/email.
-- A **Lambda** updates the **IoT Device Shadow** `desired` state to `RTL_TRIGGERED`, embedding a `.waitForTaskToken` — Step Functions pauses, waiting for physical confirmation from the aircraft.
+- A **Lambda** updates the **IoT Device Shadow** `desired` state to `RTL_TRIGGERED`, embedding a `.waitForTaskToken`. Step Functions pauses, waiting for physical confirmation from the aircraft.
 
 ### ⚡ Act (Edge Reflex)
 - The ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
