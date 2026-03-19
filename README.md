@@ -295,14 +295,14 @@ AWS IoT Core
 ## 📂 Project Structure
 ```
 AUTONOMOUS-VTOL-AIRCRAFT/
-├── cloud_infrastructure/       # AWS CDK Serverless Backend
+├── ⛅ cloud_infrastructure/       # AWS CDK Serverless Backend
 │   ├── cloud_infrastructure/
 │   │   ├── database_stack.py      # DynamoDB Flight Logs
 │   │   └── messaging_stack.py     # SQS Mission Queue + DLQ
 │   ├── app.py                     # CDK Entry Point
 │   ├── cdk.json                   
 │   └── requirements.txt           
-├── docs/
+├── 📖 docs/
 │   ├── AWS_VTOL.drawio            # Editable Architecture Source                          
 │   ├── cloud_architecture.png     
 │   └── onboard_architecture.jpeg
