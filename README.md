@@ -295,7 +295,7 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 ```
 ## 🌊 End-to-End System Flow: The Life of a Telemetry Packet
 
-The complete lifecycle of a single mission decision — from raw sensor data to physical motor response:
+The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
 
 ### 👁️ Sense (The Edge)
 - **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
