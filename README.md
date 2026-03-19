@@ -297,7 +297,7 @@ Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
 
 The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
 
-### 👁️ Sense (The Edge)
+### 👀 Sense (Edge)
 - **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
 - **Pixhawk (ArduPilot)** simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
 
@@ -305,20 +305,20 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - The **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
 - Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core**: the single handoff point between edge and cloud.
 
-### 📥 Buffer & Trigger (The Cloud Entry)
+### 📥 Buffer & Trigger (Cloud Entry)
 - IoT Core routes the payload into the **Amazon SQS Mission Queue**, absorbing any network reconnect spikes.
 - **EventBridge Pipes** polls the queue and triggers the **AWS Step Functions** state machine *(no intermediary Lambda required)*.
 
-### 🧠 Reason & Decide (The Cloud Brain)
+### 🧠 Reason & Decide (Cloud Brain)
 - Step Functions invokes **Amazon Bedrock (Nova Lite)** with the telemetry JSON for safety classification.
 - Bedrock returns: `{"verdict": "Abort", "confidence": 0.92}`.
 - Since `confidence ≥ 0.75`, the verdict is trusted. Step Functions routes down the `UNSAFE` path.
 
-### 🚨 Alert & Command (The Cloud Exit)
+### 🚨 Alert & Command (Cloud Exit)
 - **SNS** fires an immediate alert to the pilot's mobile/email.
 - A **Lambda** updates the **IoT Device Shadow** `desired` state to `RTL_TRIGGERED`, embedding a `.waitForTaskToken` — Step Functions pauses, waiting for physical confirmation from the aircraft.
 
-### ⚡ Act (The Edge Reflex)
+### ⚡ Act (Edge Reflex)
 - The ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
 - Translates `RTL_TRIGGERED` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
 - The Pixhawk takes physical control and begins Return-to-Launch.
