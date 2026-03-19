@@ -99,7 +99,7 @@ This isn't just a compute offload: every responsibility moved to the cloud direc
 
 <div align="center">
 
-| 🚫 Limitation (Pi Only) | 🌩️ Cloud Upgrade | 🎯 Architectural Impact |
+| Limitation (Pi Only) | Cloud Upgrade | Architectural Impact |
 |---|:---:|---|
 | **No Strategic Reasoning:** Safety classification relied on static rules | 🧠 **Amazon Bedrock** | Dynamic AI layer for adaptive, edge-case safety classification |
 | **Local SD Logging:** Flight logs corrupt or lost on crash | 🗄️ **Amazon DynamoDB** | Logs stream to a highly available database → data survives physical destruction |
@@ -295,14 +295,14 @@ AWS IoT Core
 ## 📂 Project Structure
 ```
 AUTONOMOUS-VTOL-AIRCRAFT/
-├── 🌥️ cloud_infrastructure/       # AWS CDK Serverless Backend
+├── cloud_infrastructure/       # AWS CDK Serverless Backend
 │   ├── cloud_infrastructure/
 │   │   ├── database_stack.py      # DynamoDB Flight Logs
 │   │   └── messaging_stack.py     # SQS Mission Queue + DLQ
 │   ├── app.py                     # CDK Entry Point
 │   ├── cdk.json                   
 │   └── requirements.txt           
-├── 📖 docs/
+├── docs/
 │   ├── AWS_VTOL.drawio            # Editable Architecture Source                          
 │   ├── cloud_architecture.png     
 │   └── onboard_architecture.jpeg
