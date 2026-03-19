@@ -209,7 +209,7 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 
 Injected directly at the Bedrock layer, it hardcodes the aircraft's physical flight limits and guarantees JSON-compliant output for Step Functions:
 
-```text
+```ini
 You are the Strategic Safety Classifier for an autonomous VTOL aircraft. 
 Your ONLY job is to evaluate incoming flight telemetry and perception data,
 and output a strict JSON response determining if the mission should 'Continue' or 'Abort'.
