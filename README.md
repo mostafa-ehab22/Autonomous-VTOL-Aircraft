@@ -207,7 +207,7 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 
 ### 🛡️ Bedrock System Prompt (Safety Classifier)
 
-This prompt forces the LLM to act as a strict, safety-biased evaluator. Injected directly at the Bedrock layer, it hardcodes the aircraft's physical flight limits and guarantees JSON-compliant output for Step Functions:
+Injected directly at the Bedrock layer, it hardcodes the aircraft's physical flight limits and guarantees JSON-compliant output for Step Functions:
 
 ```text
 You are the Strategic Safety Classifier for an autonomous VTOL aircraft. 
@@ -253,9 +253,7 @@ OUTPUT CONSTRAINTS:
 {
   "verdict": "Abort",
   "confidence": 0.95,
-  "reasoning":
-     "High wind resistance (14.2 m/s),
-     combined with visual anomaly detection exceeds safety thresholds for current battery level."
+  "reasoning": "High wind (14.2 m/s) + visual anomaly exceed safety thresholds for current battery level."
 }
 ```
 
