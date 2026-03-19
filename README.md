@@ -303,11 +303,11 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 
 ### 📡 Package & Transmit (The Bridge)
 - The **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
-- Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core** — the single handoff point between edge and cloud.
+- Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core**: the single handoff point between edge and cloud.
 
 ### 📥 Buffer & Trigger (The Cloud Entry)
 - IoT Core routes the payload into the **Amazon SQS Mission Queue**, absorbing any network reconnect spikes.
-- **EventBridge Pipes** polls the queue and triggers the **AWS Step Functions** state machine — no intermediary Lambda required.
+- **EventBridge Pipes** polls the queue and triggers the **AWS Step Functions** state machine *(no intermediary Lambda required)*.
 
 ### 🧠 Reason & Decide (The Cloud Brain)
 - Step Functions invokes **Amazon Bedrock (Nova Lite)** with the telemetry JSON for safety classification.
@@ -329,11 +329,9 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - The execution resumes, logs the confirmed abort to **DynamoDB**, and reaches `END`.
   
 > [!NOTE]
-> The Wait State uses Step Functions' `.waitForTaskToken` callback pattern.
->
-> The task token is embedded in the command sent to the VTOL.
->
-> The VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
+> Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
+> Task token is embedded in the command sent to the VTOL. <br>
+> VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
 ## 🌉 Integration: How Onboard Meets Cloud
 
