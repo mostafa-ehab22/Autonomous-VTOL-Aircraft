@@ -95,17 +95,17 @@ By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**,
 
 ## 🔍 Architectural Impact
 
-This isn't just a compute offload: every responsibility moved to the cloud directly eliminates a real in-flight failure mode that could compromise the mission, corrupt critical data, or worse, endanger the aircraft itself:
+This architecture is not a simple compute offload; it is a fault-tolerance strategy. Each responsibility delegated to AWS directly eliminates a real edge-failure mode that would otherwise endanger the aircraft or permanently corrupt mission data:
 
 <div align="center">
 
-| Limitation (Pi Only) | Cloud Upgrade | Architectural Impact |
+| Edge Vulnerability | ☁️ Cloud Mitigation | System Impact |
 |---|:---:|---|
-| **No Strategic Reasoning:** Safety classification relied on static rules | 🧠 **Amazon Bedrock** | Dynamic AI layer for adaptive, edge-case safety classification |
-| **Local SD Logging:** Flight logs corrupt or lost on crash | 🗄️ **Amazon DynamoDB** | Logs stream to a highly available database → data survives physical destruction |
-| **Dropped Telemetry:** Network drops cause lost commands with no retry | 📨 **SQS + Dead Letter Queue** | Failed telemetry retried automatically → zero commands silently dropped |
-| **Local State Only:** Mid-air reboot causes the drone to forget its mission | 🪞 **AWS IoT Device Shadow** | Cloud maintains a virtual copy → reconnections instantly restore mission state |
-| **Silent Failures:** Safety alerts visible only on local GCS | 🔔 **SNS (Mobile/Email)** | Instant push notifications to all stakeholders on any safety breach |
+| **Static Thresholds:** Abort decisions relied on hardcoded rules, not contextual reasoning | 🧠 **Amazon Bedrock** | Foundation Model evaluates multi-variable telemetry for context-aware safety verdicts |
+| **Volatile Storage:** Telemetry lost permanently on physical crash | 🗄️ **Amazon DynamoDB** | Continuous off-board streaming ensures data survives airframe destruction |
+| **Dropped Commands:** Network blips silently discard instructions with no retry | 📨 **SQS + Dead Letter Queue** | Decoupled queue guarantees command delivery despite network volatility |
+| **Ephemeral State:** Mid-air compute reboot causes complete mission state loss | 🪞 **AWS IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
+| **Isolated Alerts:** Safety warnings confined to local ground station | 🔔 **SNS (Mobile/Email)** | Push notifications instantly reach all stakeholders on any safety breach |
 
 </div>
 
