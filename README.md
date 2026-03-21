@@ -418,8 +418,8 @@ cdk deploy --all
 ### Cloud Extension
 - [x] AWS CDK infrastructure stack
 - [x] Lambda functions (normalization, command, continuation)
+- [x] Bedrock prompt engineering for safety classification
 - [ ] Step Functions state machine definition
-- [ ] Bedrock prompt engineering for safety classification
 - [ ] IoT Core rules + Device Shadow integration
 - [ ] End-to-end integration test (SITL → Cloud → ACK loop)
 
