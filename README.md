@@ -230,7 +230,7 @@ OUTPUT CONSTRAINTS:
 - Use the exact schema: {"verdict": "Continue" | "Abort", "confidence": float, "reasoning": "string"}
 ```
 
-### 📋 I/O Contract (JSON Schema)
+### 📋 Classifier I/O Contract
 
 **Input - Structured Telemetry:**
 ```json
