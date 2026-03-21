@@ -150,8 +150,8 @@ To maintain this efficiency, the following optimizations are implemented:
 Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
 
 - 🔀 **Stateless Concurrency ```(Step Functions & Lambda)```:** <br> Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
-- 🛡️ **Spike Absorption ```(Amazon SQS)```:** <br> Acts as a buffer for network reconnections, absorbing sudden telemetry dumps and feeding the pipeline at a controlled rate.
-- 🧠 **Elastic AI ```(Amazon Bedrock)```:** <br> Dynamically scales to process concurrent LLM safety classifications in the cloud, eliminating the latency of edge-device queuing.
+- 🛡️ **Spike Absorption ```(Amazon SQS)```:** <br> Buffers network reconnections, absorbing telemetry spikes and feeding the pipeline at a controlled rate.
+- 🧠 **Elastic AI ```(Amazon Bedrock)```:** <br> Dynamically scales to handle concurrent LLM safety classifications, eliminating edge-device queuing latency.
 - 📡 **Mass Device Sync ```(AWS IoT Core)```:** <br> Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
 - 🌍 **Global Replication ```(AWS CDK)```:** <br> Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region.
 
