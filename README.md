@@ -141,9 +141,10 @@ Total Cost = C_IoT + C_Lambda + C_Bedrock + C_StepFunctions + C_SNS + C_DynamoDB
 
 To maintain this efficiency, the following optimizations are implemented:
 
-1. 🧠 **Model Selection:** <br> **Amazon Nova Lite** over Claude 3.5 Sonnet **reduces inference cost by ~90%** while maintaining sufficient reasoning for safety classification.
+1. 🧠 **Model Selection:** <br> **Amazon Nova Lite** over Claude Sonnet **reduces inference cost by ~98%** *($0.06 vs $3.00 per 1M tokens)*, sufficient for a binary Continue/Abort verdict.
 2. 📡 **Basic Ingest:** <br> Telemetry that doesn't require the Message Broker is routed via **Basic Ingest** to **eliminate 100% of the IoT Core messaging fee**.
-3. 🗑️ **Log Retention:** <br> CloudWatch logs configured with a **7-day expiration** to prevent storage costs from accumulating over time.
+3. 🔢 **Token Efficiency:** <br> Payload telemetry constrained to a compact JSON schema, capping Bedrock input at **~300 tokens per inference request**.
+4. 🗑️ **Log Retention:** <br> CloudWatch logs configured with a **7-day expiration** to prevent storage costs from accumulating over time.
 
 ## 🚀 Scaling to a Fleet (1,000+ VTOLs)
 
