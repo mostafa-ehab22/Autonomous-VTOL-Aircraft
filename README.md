@@ -125,11 +125,11 @@ Total Cost = C_IoT + C_Lambda + C_Bedrock + C_StepFunctions + C_SNS + C_DynamoDB
 | Service | Estimated Usage (1 Mission) | Estimated Cost (USD) |
 |---|:---:|:---:|
 | 📡 AWS IoT Core | 100 MQTT Messages *`(Cloud → Drone downlink commands via broker)`* + 2 Shadow Updates | ~$0.00010 |
-| 🧠 Amazon Bedrock | 300 Input + 100 Output Tokens (Nova Lite) | ~$0.000042 |
+| 🧠 Bedrock | 300 Input + 100 Output Tokens (Nova Lite) | ~$0.000042 |
 | ⚙️ Step Functions | 12 State Transitions | ~$0.00030 |
 | ⚡ AWS Lambda | 4 Invocations (128MB, avg. 200ms) | ~$0.0000025 |
 | 📨 SQS + SNS | < 1,000 requests | < $0.00001 |
-| 🗄️ Amazon DynamoDB | ~10 Writes + ~5 Reads (mission state & logs) | < $0.00001 |
+| 🗄️ DynamoDB | ~10 Writes + ~5 Reads (mission state & logs) | < $0.00001 |
 | **💰 Total** | **1 Complete Mission Cycle** | **~$0.00044** |
 
 </div>
