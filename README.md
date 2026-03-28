@@ -111,13 +111,12 @@ This architecture is not a simple compute offload; it is a fault-tolerance strat
 
 ## 💰 Cost Analysis
 
-This entire cloud architecture is designed with a **"Pay-as-you-go" serverless model**. By utilizing event-driven triggers, no infrastructure runs 24/7 and no idle containers. When the fleet is grounded, 
-the cost is **$0.00**. 
+This entire cloud architecture is designed with a **"Pay-as-you-go" serverless model**. By utilizing event-driven triggers, no infrastructure runs 24/7 and no idle containers. When the fleet is grounded, the cost is **$0.00**.
 
 ### 📉 Estimated Cost per Flight
 
 Total cost for a single mission execution is the sum of its serverless components:
-```
+```text
 Total Cost = C_IoT + C_Lambda + C_Bedrock + C_StepFunctions + C_SNS + C_DynamoDB
 ```
 
@@ -125,26 +124,29 @@ Total Cost = C_IoT + C_Lambda + C_Bedrock + C_StepFunctions + C_SNS + C_DynamoDB
 
 | Service | Estimated Usage (1 Mission) | Estimated Cost (USD) |
 |---|:---:|:---:|
-| 📡 AWS IoT Core | 100 MQTT Messages + 2 Shadow Updates | ~$0.00012 |
+| 📡 AWS IoT Core | 100 MQTT Messages (downlink commands via broker) + 2 Shadow Updates | ~$0.00010 |
 | 🧠 Amazon Bedrock | 300 Input + 100 Output Tokens (Nova Lite) | ~$0.000042 |
 | ⚙️ Step Functions | 12 State Transitions | ~$0.00030 |
-| ⚡ AWS Lambda | 4 Invocations (128MB, avg. 200ms) | ~$0.000016 |
+| ⚡ AWS Lambda | 4 Invocations (128MB, avg. 200ms) | ~$0.0000025 |
 | 📨 SQS + SNS | < 1,000 requests | < $0.00001 |
-| **💰 Total** | **1 Complete Mission Cycle** | **~$0.00049** |
+| **💰 Total** | **1 Complete Mission Cycle** | **~$0.00044** |
 
 </div>
 
 > [!TIP]
-> Can run **2,000+ missions for $1.00 USD**, making this one of the most cost-efficient autonomous fleet architectures possible.
+> Can run **2,200+ missions for $1.00 USD**, making this one of the most cost-efficient autonomous fleet architectures possible.
 
 ### 🛠️ Cost Optimization Strategies
 
-To maintain this efficiency, the following optimizations are implemented:
+To maintain this efficiency, the architecture relies on four core optimizations:
 
-1. 🧠 **Model Selection:** <br> **Amazon Nova Lite** over Claude Sonnet **reduces inference cost by ~98%** *($0.06 vs $3.00 per 1M tokens)*, sufficient for a binary Continue/Abort verdict.
-2. 📡 **Basic Ingest:** <br> Telemetry that doesn't require the Message Broker is routed via **Basic Ingest** to **eliminate 100% of the IoT Core messaging fee**.
-3. 🔢 **Token Efficiency:** <br> Payload telemetry constrained to a compact JSON schema, capping Bedrock input at **~300 tokens per inference request**.
-4. 🗑️ **Log Retention:** <br> CloudWatch logs configured with a **7-day expiration** to prevent storage costs from accumulating over time.
+- 🧠 **Strategic Model Selection:** <br> **Amazon Nova Lite** over Claude Sonnet **cuts inference cost by ~98%** `($0.06 vs $3.00 per 1M tokens)`, sufficient for a binary Continue/Abort verdict.
+
+- 📡 **Asymmetric Telemetry Routing:** <br> High-frequency uplink telemetry `Drone → Cloud` bypasses the MQTT broker entirely via **Basic Ingest**, **eliminating 100% of ingestion fees**. <br> Only critical downlink commands `Cloud → Drone` draw from the **$0.00010** budget.
+  
+- 🔢 **Token Efficiency:** <br> Telemetry is constrained to a compact JSON schema, strictly capping Bedrock input at **~300 tokens per inference request**.
+
+- 🗑️ **Ephemeral Log Retention:** <br> CloudWatch logs configured with a **7-day expiration**, preventing storage costs from accumulating over time.
 
 ## 🚀 Scaling to a Fleet (1,000+ VTOLs)
 
