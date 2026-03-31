@@ -117,7 +117,7 @@ This entire cloud architecture is designed with a **"Pay-as-you-go" serverless m
 
 Total cost for a single mission execution is the sum of its serverless components:
 ```text
-Total Cost = C_IoT + C_Lambda + C_Bedrock + C_StepFunctions + C_SNS + C_DynamoDB
+Total Cost = C_IoT + C_Bedrock + C_StepFunctions + C_Lambda  + C_SQS + C_DynamoDB
 ```
 
 <div align="center">
