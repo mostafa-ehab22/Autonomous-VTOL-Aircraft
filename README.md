@@ -211,7 +211,7 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 - No model artifact versioning overhead
 - Team focus stays on **mission integration**, not infrastructure
 
-### 🛡️ Bedrock System Prompt (Safety Classifier)
+### 🛡️ Bedrock Classifier System Prompt
 
 Injected directly at the Bedrock layer, it hardcodes the aircraft's physical flight limits and guarantees JSON-compliant output for Step Functions:
 
@@ -307,7 +307,7 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
 - **Pixhawk (ArduPilot)** simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
 
-### 📡 Package & Transmit (The Bridge)
+### 📡 Package & Transmit (Bridge)
 - The **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
 - Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core**: the single handoff point between edge and cloud.
 
@@ -329,7 +329,7 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - Translates `RTL_TRIGGERED` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
 - The Pixhawk takes physical control and begins Return-to-Launch.
 
-### ✅ Acknowledge (The Loop Closes)
+### ✅ Acknowledge (Loop Closes)
 - The ROS2 node publishes an MQTT ACK back to **IoT Core**.
 - An **IoT Rule** calls `SendTaskSuccess`, returning the task token to Step Functions.
 - The execution resumes, logs the confirmed abort to **DynamoDB**, and reaches `END`.
