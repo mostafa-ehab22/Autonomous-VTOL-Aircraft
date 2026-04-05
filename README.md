@@ -77,8 +77,8 @@ The Cloud Extension was architected to transition the aircraft from a standalone
 By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, the aircraft's "reflexes" remain local and deterministic, while its "decisions" benefit from LLM-level reasoning, durable state persistence, and fleet-scale orchestration.
 
 > [!NOTE]
-> **Onboard (Reflexes):** Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.<br>
-> **Cloud (Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
+> **Onboard (Reflexes):** <br> Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.<br>
+> **Cloud (Strategy):** <br> Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
 
 <div align="center">
 
