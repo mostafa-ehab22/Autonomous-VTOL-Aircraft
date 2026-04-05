@@ -12,7 +12,7 @@ Designed to scale from one aircraft to a **fleet of thousands** with **zero arch
   
 <div align="center">
   
-| | ✈️ Onboard System | 🌥️ Cloud Extension |
+| | ✈️ Onboard Component | 🌥️ Cloud Component |
 |---|:---:|:---:|
 | **🎯 Role** | Embedded flight control & perception | Serverless AWS mission intelligence |
 | **💻 Platform** | Raspberry Pi + Pixhawk | AWS (eu-central-1) |
