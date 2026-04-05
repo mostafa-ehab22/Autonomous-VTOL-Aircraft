@@ -23,8 +23,6 @@ Designed to scale from one aircraft to a **fleet of thousands** with **zero arch
 
 > [!IMPORTANT]
 Both parts are **independent by design**. Enabling **horizontal scaling** with **no code modifications**.
-> - Onboard system handles everything **time-critical**.
-> - Cloud handles everything **cognitive**. <br>
 
 
 <div align="center">
