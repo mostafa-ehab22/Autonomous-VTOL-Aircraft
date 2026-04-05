@@ -14,10 +14,10 @@ Designed to scale from one aircraft to a **fleet of thousands** with **zero arch
   
 | | ✈️ Onboard System | 🌥️ Cloud Extension |
 |---|:---:|:---:|
-| **Role** | Embedded flight control & perception | Serverless AWS mission intelligence |
-| **Platform** | Raspberry Pi + Pixhawk | AWS (eu-central-1) |
-| **Handles** | Anything time-critical | Anything cognitive |
-| **Tech** | ROS2, ArduPilot, YOLO11 | Bedrock, Step Functions, IoT Core |
+| **🎯 Role** | Embedded flight control & perception | Serverless AWS mission intelligence |
+| **💻 Platform** | Raspberry Pi + Pixhawk | AWS (eu-central-1) |
+| **🚦 Handles** | Anything time-critical | Anything cognitive |
+| **🛠 Tech** | ROS2, ArduPilot, YOLO11 | Bedrock, Step Functions, IoT Core |
 
 </div>
 
