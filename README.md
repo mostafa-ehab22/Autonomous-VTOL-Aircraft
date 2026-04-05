@@ -8,7 +8,7 @@ A full-stack autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system c
 
 Designed to scale from one aircraft to a **fleet of thousands** with **zero architectural changes**.
  
-### System lives in two separate parts:
+### 🧩 Dual-Component System
   
 <div align="center">
   
