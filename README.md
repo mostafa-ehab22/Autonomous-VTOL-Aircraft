@@ -375,11 +375,11 @@ AUTONOMOUS-VTOL-AIRCRAFT/
 │   ├── lambdas/                       # [RUNTIME] Lambda Handlers
 │   │   ├── normalizer/                # Validate & normalize raw telemetry payload
 │   │   │   └── handler.py
-│   │   ├── commander/                 # Dispatch abort command via Device Shadow
+│   │   ├── abort/                     # Dispatch abort command via Device Shadow
 │   │   │   └── handler.py
-│   │   ├── continuation/              # Safe path: DynamoDB log + SNS + Shadow sync
+│   │   ├── continue/                  # Safe path: DynamoDB log + SNS + Shadow sync
 │   │   │   └── handler.py
-│   │   ├── ack_validator/             # Validate VTOL ACK + SendTaskSuccess
+│   │   ├── acknowledge/               # Validate VTOL ACK + SendTaskSuccess
 │   │   │   └── handler.py
 │   │   └── failsafe/                  # Force RTL via Shadow + SNS alert on Bedrock failure
 │   │       └── handler.py
