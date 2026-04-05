@@ -366,16 +366,31 @@ AWS IoT Core
 ## 📂 Project Structure
 ```
 AUTONOMOUS-VTOL-AIRCRAFT/
-├── ⛅ cloud_infrastructure/       # AWS CDK Serverless Backend
-│   ├── cloud_infrastructure/
-│   │   ├── database_stack.py      # DynamoDB Flight Logs
-│   │   └── messaging_stack.py     # SQS Mission Queue + DLQ
-│   ├── app.py                     # CDK Entry Point
-│   ├── cdk.json                   
-│   └── requirements.txt           
+├── ⛅ cloud_infrastructure/
+│   │
+│   ├── cloud_infrastructure/          # [INFRASTRUCTURE] AWS CDK Stack Definitions
+│   │   ├── database_stack.py          # DynamoDB Flight Logs
+│   │   └── messaging_stack.py         # SQS Mission Queue + DLQ
+│   │
+│   ├── lambdas/                       # [RUNTIME] Lambda Handlers
+│   │   ├── normalizer/                # Validate & normalize raw telemetry payload
+│   │   │   └── handler.py
+│   │   ├── commander/                 # Dispatch abort command via Device Shadow
+│   │   │   └── handler.py
+│   │   ├── continuation/              # Safe path: DynamoDB log + SNS + Shadow sync
+│   │   │   └── handler.py
+│   │   ├── ack_validator/             # Validate VTOL ACK + SendTaskSuccess
+│   │   │   └── handler.py
+│   │   └── failsafe/                  # Force RTL via Shadow + SNS alert on Bedrock failure
+│   │       └── handler.py
+│   │
+│   ├── app.py                         # CDK Entry Point
+│   ├── cdk.json
+│   └── requirements.txt
+│
 ├── 📖 docs/
-│   ├── AWS_VTOL.drawio            # Editable Architecture Source                          
-│   ├── cloud_architecture.png     
+│   ├── AWS_VTOL.drawio                # Editable Architecture Source
+│   ├── cloud_architecture.png
 │   └── onboard_architecture.jpeg
 ├── .gitignore
 ├── LICENSE
