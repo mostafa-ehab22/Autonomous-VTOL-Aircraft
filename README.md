@@ -449,7 +449,7 @@ cdk deploy --all
 | Document | Description |
 | :--- | :--- |
 | [Source Files & Full Assets](docs/) | **Technical Source:** `.drawio` diagram and detailed guides |
-| [Cloud Extension Diagram](docs/cloud_architecture.png) | AWS serverless backend architecture |
+| [Cloud Extension Diagram](docs/cloud_architecture.jpg) | AWS serverless backend architecture |
 | [Onboard System Diagram](docs/onboard_architecture.jpeg) | Embedded flight control & logic pipeline |
 | [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
 
