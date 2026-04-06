@@ -65,7 +65,7 @@ The onboard system is structured into three functional layers plus a dedicated v
 # 🌥️ Part 2: Cloud Extension Architecture
 
 <div align="center">
-  <img src="docs/cloud_architecture.jpg" alt="Cloud Architecture" width="99%"/>
+  <img src="docs/cloud_architecture.drawio.svg" alt="Cloud Architecture" width="99%"/>
 </div>
 
 </div>
