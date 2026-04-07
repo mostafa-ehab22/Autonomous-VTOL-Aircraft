@@ -437,9 +437,9 @@ cdk deploy --all
 ### Onboard System
 - [x] YOLO11 model training on Roboflow dataset
 - [x] ROS2 workspace setup with MAVLink bridge node
-- [ ] SITL simulation validation
-- [ ] Geofence and failsafe parameter tuning
 - [ ] Hardware integration on Pixhawk + Raspberry Pi
+- [ ] Geofence and failsafe parameter tuning
+- [ ] SITL simulation validation
 
 ### Cloud Extension
 - [x] AWS CDK infrastructure stack
