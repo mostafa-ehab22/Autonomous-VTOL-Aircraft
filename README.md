@@ -262,11 +262,9 @@ OUTPUT CONSTRAINTS:
 ```
 
 > [!WARNING]
-> ### Safety-First Failsafe Logic
-> *Aircraft safety is **never held hostage to network availability:***
+> *Aircraft safety is **never fully delegated to the cloud:***
 > - **Cloud Timeout:** No verdict is received within `3 seconds`, ROS 2 controller triggers local **RTL** independently.
 > - **Low Confidence:** Verdict confidence `< 0.75` is automatically treated as `Abort` by ROS 2 controller.
-
 
 ## 🔄 Mission Workflow Detail
 
@@ -275,28 +273,36 @@ OUTPUT CONSTRAINTS:
 Safety Check → SAFE
 → Amazon SNS (Log Mission Topic)
 → Mission Notifications (Mobile/Email)
-→ Continue Mission (Sync State & Notify Pilot)
+→ DynamoDB (Log Mission Outcome)
+→ Continue Mission (Report ACTIVE → Device Shadow)
 → END
 ```
 
 **❌ Unsafe Path:**
 ```
 Safety Check → UNSAFE
-→ Dispatch Abort Command (Update Shadow Device → VTOL receives abort command)
+→ Dispatch Abort Command (Send ABORT + Task Token → Device Shadow)
 → Amazon SNS (Log Alert Topic)
-→ Wait State (30 seconds, waitForTaskToken)
-→ ACK received via IoT Rule → Verify Acknowledgment (Validate Task Token)
+→ Awaiting Physical Abort (30s, waitForTaskToken)
+→ ACK received via IoT Rule
+→ Verify Acknowledgment (Validate Task Token)
+→ DynamoDB (Log Confirmed Abort)
 → END
 ```
+> [!NOTE]
+> Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
+> Task token is embedded in the command sent to the VTOL. <br>
+> VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
 ⚠️ **Cloud Failsafe Path (Infrastructure Error):**
 ```
-Amazon Bedrock (AI Decision Making) → CATCH: API Error / Timeout
-→ Execute Failsafe (Trigger RTL Command)
-→ Update Shadow State (Forces RTL command directly to VTOL via IoT Core)
-→ Amazon SNS (Log Alert Topic — "AI Unreachable, RTL Initiated")
+Step Functions Pipeline → CATCH: Any Cloud Error
+→ Execute Failsafe (RTL_TRIGGERED → Device Shadow)
+→ Amazon SNS (Log Alert Topic — "Cloud Unreachable, RTL Initiated")
+→ DynamoDB (Log Failsafe Event)
 → END
 ```
+
 ## 🌊 End-to-End System Flow: The Life of a Telemetry Packet
 
 The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
@@ -331,11 +337,6 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - The ROS2 node publishes an MQTT ACK back to **IoT Core**.
 - An **IoT Rule** calls `SendTaskSuccess`, returning the task token to Step Functions.
 - The execution resumes, logs the confirmed abort to **DynamoDB**, and reaches `END`.
-  
-> [!NOTE]
-> Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
-> Task token is embedded in the command sent to the VTOL. <br>
-> VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
 ## 🌉 Integration: How Onboard Meets Cloud
 
