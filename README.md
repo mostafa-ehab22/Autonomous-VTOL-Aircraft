@@ -124,12 +124,12 @@ Total Cost = C_IoT + C_Bedrock + C_StepFunctions + C_Lambda  + C_SQS + C_DynamoD
 | Service | Estimated Usage (1 Mission) | Estimated Cost (USD) |
 |---|:---:|:---:|
 | 📡 IoT Core | 100 MQTT Messages *`(Cloud → Drone downlink commands via broker)`* + 2 Shadow Updates | ~$0.00010 |
-| 🧠 Bedrock | 300 Input + 100 Output Tokens (Nova Lite) | ~$0.000042 |
-| ⚙️ Step Functions | 12 State Transitions | ~$0.00030 |
-| ⚡ Lambda | 4 Invocations (128MB, avg. 200ms) | ~$0.0000025 |
+| 🧠 Bedrock | 300 Input + 100 Output Tokens (Nova Lite) | ~$0.00004 |
+| ⚙️ Step Functions | 12 State Transitions | ~$0.0003 |
+| ⚡ Lambda | 3 Invocations (128MB, avg. 200ms) | ~$0.000002 |
 | 📨 SQS + SNS | < 1,000 requests | < $0.00001 |
 | 🗄️ DynamoDB | ~10 Writes + ~5 Reads (mission state & logs) | < $0.00001 |
-| **💰 Total** | **1 Complete Mission Cycle** | **~$0.00044** |
+| **💰 Total** | **1 Complete Mission Cycle** | **~$0.0004** |
 
 </div>
 
@@ -268,7 +268,7 @@ OUTPUT CONSTRAINTS:
 
 ## 🔄 Mission Workflow Detail
 
-**✅ Safe Path:**
+**✅ Safe Path** *(2 Lambda Invocations)***:**
 ```
 Safety Check → SAFE
 → Amazon SNS (Log Mission Topic)
@@ -278,7 +278,7 @@ Safety Check → SAFE
 → END
 ```
 
-**❌ Unsafe Path:**
+**❌ Unsafe Path** *(3 Lambda Invocations)***:**
 ```
 Safety Check → UNSAFE
 → Dispatch Abort Command (Send ABORT + Task Token → Device Shadow)
@@ -294,7 +294,7 @@ Safety Check → UNSAFE
 > Task token is embedded in the command sent to the VTOL. <br>
 > VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
-⚠️ **Cloud Failsafe Path (Infrastructure Error):**
+⚠️ **Cloud Failsafe Path** *(2 Lambda Invocations)***:**
 ```
 Step Functions Pipeline → CATCH: Any Cloud Error
 → Execute Failsafe (RTL_TRIGGERED → Device Shadow)
@@ -325,18 +325,20 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - Since `confidence ≥ 0.75`, the verdict is trusted. Step Functions routes down the `UNSAFE` path.
 
 ### 🚨 Alert & Command (Cloud Exit)
+- **Abort Lambda** updates the **IoT Device Shadow** `desired` state to `ABORT`, embedding a `.waitForTaskToken`.
 - **SNS** fires an immediate alert to the pilot's mobile/email.
-- A **Lambda** updates the **IoT Device Shadow** `desired` state to `RTL_TRIGGERED`, embedding a `.waitForTaskToken`. Step Functions pauses, waiting for physical confirmation from the aircraft.
+- Step Functions pauses, waiting for physical confirmation from the aircraft.
 
 ### ⚡ Act (Edge Reflex)
 - The ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
-- Translates `RTL_TRIGGERED` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
-- The Pixhawk takes physical control and begins Return-to-Launch.
+- Translates `ABORT` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
+- Pixhawk takes physical control and executes the abort maneuver.
 
 ### ✅ Acknowledge (Loop Closes)
 - The ROS2 node publishes an MQTT ACK back to **IoT Core**.
-- An **IoT Rule** calls `SendTaskSuccess`, returning the task token to Step Functions.
-- The execution resumes, logs the confirmed abort to **DynamoDB**, and reaches `END`.
+- An **IoT Rule** triggers the **Acknowledge Lambda** with the task token.
+- **Acknowledge Lambda** calls `SendTaskSuccess`, resuming Step Functions execution.
+- Execution logs the confirmed abort to **DynamoDB** and reaches `END`.
 
 ## 🌉 Integration: How Onboard Meets Cloud
 
@@ -354,7 +356,7 @@ ROS2 Node (MAVLink Bridge)
 AWS IoT Core
     │
     └─► Mission Queue → Step Functions → Bedrock Decision
-    └─► Device Shadow ← Command Lambda (mission updates back to VTOL)
+    └─► Device Shadow ← Abort / Failsafe Lambda (commands back to VTOL)
 ```
 
 > [!TIP]
@@ -437,7 +439,7 @@ cdk deploy --all
 
 ### Cloud Extension
 - [x] AWS CDK infrastructure stack
-- [x] Lambda functions (normalization, command, continuation)
+- [x] Lambda functions *(normalizer, abort, continue, acknowledge, failsafe)*
 - [x] Bedrock prompt engineering for safety classification
 - [ ] Step Functions state machine definition
 - [ ] IoT Core rules + Device Shadow integration
