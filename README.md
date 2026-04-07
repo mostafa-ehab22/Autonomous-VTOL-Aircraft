@@ -391,7 +391,7 @@ AUTONOMOUS-VTOL-AIRCRAFT/
 │
 ├── 📖 docs/
 │   ├── AWS_VTOL.drawio                # Editable Architecture Source
-│   ├── cloud_architecture.png
+│   ├── cloud_architecture.jpg
 │   └── onboard_architecture.jpeg
 │ 
 ├── .gitignore
