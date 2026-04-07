@@ -291,8 +291,8 @@ Safety Check → UNSAFE
 ```
 > [!NOTE]
 > Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
-> Task token is embedded in the command sent to the VTOL. <br>
-> VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
+> - Task token is embedded in the command sent to the VTOL. <br>
+> - VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution.
 
 ⚠️ **Cloud Failsafe Path** *(2 Lambda Invocations)***:**
 ```
