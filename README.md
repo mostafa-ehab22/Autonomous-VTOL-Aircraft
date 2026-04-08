@@ -89,12 +89,13 @@ By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**,
 </div>
 
 > [!NOTE]
-> **Onboard (Reflexes):** <br> Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.<br><br>
+> **Onboard (Reflexes):** <br> Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.
+>
 > **Cloud (Strategy):** <br> Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
 
 ## 🔍 Architectural Impact
 
-This architecture is not a simple compute offload; it is a fault-tolerance strategy. Each responsibility delegated to AWS directly eliminates a real edge-failure mode that would otherwise endanger the aircraft or permanently corrupt mission data:
+This is not a compute offload. Every responsibility delegated to AWS eliminates a real in-flight failure mode that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach:
 
 <div align="center">
 
