@@ -103,7 +103,7 @@ This architecture is not a simple compute offload; it is a fault-tolerance strat
 | **Static Thresholds:** Abort decisions relied on hardcoded rules, not contextual reasoning | 🧠 **Amazon Bedrock** | Foundation Model evaluates multi-variable telemetry for context-aware safety verdicts |
 | **Volatile Storage:** Telemetry lost permanently on physical crash | 🗄️ **Amazon DynamoDB** | Continuous off-board streaming ensures data survives airframe destruction |
 | **Dropped Commands:** Network blips silently discard instructions with no retry | 📨 **SQS + Dead Letter Queue** | Decoupled queue guarantees command delivery despite network volatility |
-| **Ephemeral State:** Mid-air compute reboot causes complete mission state loss | 🪞 **AWS IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
+| **Ephemeral State:** Mid-air compute reboot causes complete mission state loss | 🥷🏻 **AWS IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
 | **Isolated Alerts:** Safety warnings confined to local ground station | 🔔 **SNS (Mobile/Email)** | Push notifications instantly reach all stakeholders on any safety breach |
 
 </div>
