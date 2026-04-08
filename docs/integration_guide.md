@@ -4,7 +4,7 @@ This guide outlines the communication bridge between the **Onboard Flight System
 
 ## 🏗️ The Bridge Architecture
 
-The telemetry pipeline follows a "Protocol Translation" pattern. Since AWS IoT Core requires MQTT over TLS (Port 8883), and ArduPilot speaks MAVLink (UDP/Serial), the Raspberry Pi acts as the translation gateway.
+Telemetry pipeline follows a "Protocol Translation" pattern. Since AWS IoT Core requires MQTT over TLS (Port 8883), and ArduPilot speaks MAVLink (UDP/Serial), the Raspberry Pi acts as the translation gateway.
 
 ## 1. Onboard Data Ingestion
 
