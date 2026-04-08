@@ -95,7 +95,7 @@ By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**,
 
 ## 🔍 Architectural Impact
 
-This is not a simple compute offload. Every responsibility delegated to AWS **eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach:
+This is not a simple compute offload. **Every responsibility delegated to AWS eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach:
 
 <div align="center">
 
