@@ -376,11 +376,11 @@ AWS IoT Core
 AUTONOMOUS-VTOL-AIRCRAFT/
 ├── ⛅ cloud_infrastructure/
 │   │
-│   ├── cloud_infrastructure/          [INFRASTRUCTURE] → AWS CDK Stack Definitions
+│   ├── cloud_infrastructure/          [INFRASTRUCTURE: AWS CDK Stack Definitions]
 │   │   ├── database_stack.py          # DynamoDB Flight Logs
 │   │   └── messaging_stack.py         # SQS Mission Queue + DLQ
 │   │
-│   ├── lambdas/                       [RUNTIME] → Lambda Handlers
+│   ├── lambdas/                       [RUNTIME: Lambda Handlers]  
 │   │   ├── normalizer/                # Validate & normalize raw telemetry payload
 │   │   │   └── handler.py
 │   │   ├── abort/                     # Send ABORT + Task Token via Device Shadow
