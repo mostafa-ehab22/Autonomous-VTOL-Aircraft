@@ -367,7 +367,7 @@ AWS IoT Core
 > [!TIP]
 > The ROS2 MAVLink bridge node handles **bidirectional flow**:
 > - **Upstream `(VTOL → Cloud)`:** Publishes telemetry to AWS IoT Core via MQTT over TLS.
-> - **Downstream `(Cloud → VTOL)`:** Receives cloud-originated commands *(abort, reroute)* via Device Shadow delta updates.
+> - **Downstream `(Cloud → VTOL)`:** Receives cloud commands *(abort, reroute)* via Device Shadow delta updates.
 >
 > 📖 See the full [Integration Guide](docs/integration_guide.md) here.
 
