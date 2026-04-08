@@ -89,9 +89,9 @@ By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**,
 </div>
 
 > [!NOTE]
-> **Onboard (Reflexes):** <br> Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.
+> **Onboard (Reflexes):** Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.
 >
-> **Cloud (Strategy):** <br> Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
+> **Cloud (Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
 
 ## 🔍 Architectural Impact
 
