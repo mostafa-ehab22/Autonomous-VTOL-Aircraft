@@ -43,12 +43,12 @@ To ensure fleet-scale compatibility and enforce Basic Ingest cost optimization, 
 >
 > *AWS IoT Core supports QoS 0 and QoS 1 only.*
 
-## 4. The Acknowledgment Loop (Handshake)
+## 4. Acknowledgment Loop (Handshake)
 
 To prevent "fire and forget" failures, the system utilizes a **Task Token** pattern via Step Functions:
 
-1. **Cloud:** The **Abort Lambda** updates the Device Shadow `desired` state with `command: "ABORT"` and an embedded `task_token`.
-2. **VTOL:** The ROS2 node, subscribed to the **Shadow delta topic**, receives the state change instantly and executes the abort maneuver.
+1. **Cloud:** **Abort Lambda** updates the Device Shadow `desired` state with `command: "ABORT"` and an embedded `task_token`.
+2. **VTOL:** ROS2 node, subscribed to the **Shadow delta topic**, receives the state change instantly and executes the abort maneuver.
 3. **VTOL:** Publishes an MQTT ACK containing the task token back to IoT Core.
 4. **Cloud:** An IoT Rule triggers the **Acknowledge Lambda**, which calls `SendTaskSuccess` to resume the paused Step Functions execution.
 
