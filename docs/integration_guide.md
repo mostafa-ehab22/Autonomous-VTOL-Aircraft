@@ -12,9 +12,9 @@ The **MAVLink Bridge Node** (ROS2) is responsible for:
 
 - **Subscribing:** Listening to local ROS2 topics (e.g., `/mavros/global_position/global`).
 - **Filtering:** Only forwarding mission-critical telemetry to the cloud to reduce bandwidth/cost.
-- **Heartbeats:** Maintaining a 1Hz "I'm Alive" signal to the AWS Device Shadow.
+- **Publishing:** Streaming structured telemetry to AWS IoT Core at regular intervals.
 
-## 2. Secure Communication (TLS 1.2)
+## 2. Secure Communication (TLS)
 
 AWS IoT Core requires certificate-based authentication. The following assets must be stored in the onboard `certs/` directory:
 
@@ -23,32 +23,41 @@ AWS IoT Core requires certificate-based authentication. The following assets mus
 - `private.pem.key` (Device private key)
 
 > [!IMPORTANT]
-> **Clock Sync Required:** If the Raspberry Pi’s system clock is out of sync (common on hardware without RTC), TLS handshakes will fail. Always sync time via `chrony` or `ntp` before initiating the MQTT bridge.
+> **Clock Sync Required:** If the Raspberry Pi's system clock is out of sync (common on hardware without RTC), TLS handshakes will fail. Always sync time via `chrony` or `ntp` before initiating the MQTT bridge.
 
 ## 3. MQTT Topic Structure
 
-To ensure fleet-scale compatibility, we utilize a hierarchical topic structure:
+To ensure fleet-scale compatibility and enforce Basic Ingest cost optimization, all topics use `{thing_name}` as the unique VTOL identifier. QoS levels are selected per topic based on delivery guarantees required:
 
-| Topic                                    | Purpose                                   | Payload Type  |
-| :--------------------------------------- | :---------------------------------------- | :------------ |
-| `vtol/{drone_id}/telemetry`              | Real-time position, battery, and status   | JSON          |
-| `vtol/{drone_id}/mission/request`        | Requests a safety check for a new mission | JSON          |
-| `$aws/things/{thing_name}/shadow/update` | Syncs mission state (Abort/Continue)      | JSON (Shadow) |
+| Topic | Purpose | Routing | QoS |
+| :---- | :------- | :------ | :-- |
+| `$aws/rules/MissionTelemetryRule/{thing_name}` | High-frequency telemetry uplink | Basic Ingest ($0 messaging fee) | 0 |
+| `vtol/{thing_name}/mission/request` | Safety check request to Step Functions | Standard MQTT | 1 |
+| `$aws/things/{thing_name}/shadow/update` | Cloud command sync (Abort/RTL) | Shadow Service | 1 |
+| `$aws/things/{thing_name}/shadow/update/delta` | Receive cloud-originated commands | Shadow Delta (downstream) | 1 |
+
+> [!NOTE]
+> **QoS (Quality of Service)** controls MQTT message delivery guarantees:
+> - **QoS 0 (At most once):** Sends once with no confirmation. Acceptable for high-frequency telemetry where losing one reading is not critical.
+> - **QoS 1 (At least once):** Retries until acknowledged. Required for mission-critical commands where delivery must be guaranteed.
+>
+> *AWS IoT Core supports QoS 0 and QoS 1 only.*
 
 ## 4. The Acknowledgment Loop (Handshake)
 
 To prevent "fire and forget" failures, the system utilizes a **Task Token** pattern via Step Functions:
 
-1. **Cloud:** Updates the Device Shadow with a `desired` state (e.g., `command: "ABORT"` + `task_token: "xyz"`).
-2. **VTOL:** Receives the delta update, executes the command, and publishes an ACK to an IoT Rule.
-3. **Cloud:** The IoT Rule triggers a Lambda that sends `SendTaskSuccess` back to the Step Function to resume the mission workflow.
+1. **Cloud:** The **Abort Lambda** updates the Device Shadow `desired` state with `command: "ABORT"` and an embedded `task_token`.
+2. **VTOL:** The ROS2 node, subscribed to the **Shadow delta topic**, receives the state change instantly and executes the abort maneuver.
+3. **VTOL:** Publishes an MQTT ACK containing the task token back to IoT Core.
+4. **Cloud:** An IoT Rule triggers the **Acknowledge Lambda**, which calls `SendTaskSuccess` to resume the paused Step Functions execution.
 
 ## 5. Failsafe: Connection Loss
 
 If the Raspberry Pi loses 4G/5G connectivity:
 
 - **Onboard:** ArduPilot remains in control. The ROS2 node caches critical events.
-- **Cloud:** The Device Shadow marks the aircraft as `offline`.
+- **Cloud:** An IoT Rule subscribes to `$aws/events/presence/disconnected/{clientId}` to detect connection loss and updates the Device Shadow `reported` state to `offline`.
 - **Reconnection:** Upon re-establishing a link, the Pi syncs its local state with the Shadow's `reported` state to resume cloud-monitored tracking.
 
 ---
