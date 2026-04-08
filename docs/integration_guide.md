@@ -30,7 +30,7 @@ AWS IoT Core requires certificate-based authentication. The following assets mus
 To ensure fleet-scale compatibility and enforce Basic Ingest cost optimization, all topics use `{thing_name}` as the unique VTOL identifier. QoS levels are selected per topic based on delivery guarantees required:
 
 | Topic | Purpose | Routing | QoS |
-| :---- | :------- | :------ | :-- |
+| :---- | :------- | :------ | :--: |
 | `$aws/rules/MissionTelemetryRule/{thing_name}` | High-frequency telemetry uplink | Basic Ingest ($0 messaging fee) | 0 |
 | `vtol/{thing_name}/mission/request` | Safety check request to Step Functions | Standard MQTT | 1 |
 | `$aws/things/{thing_name}/shadow/update` | Cloud command sync (Abort/RTL) | Shadow Service | 1 |
