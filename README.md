@@ -452,7 +452,7 @@ cdk deploy --all
 - [ ] IoT Core rules + Device Shadow integration
 - [ ] End-to-end integration test (SITL → Cloud → ACK loop)
 
-### 🔭 Future Optimizations (Post-V1)
+## 🔭 Future Optimizations (Post-V1)
 * **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
   
 * **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
