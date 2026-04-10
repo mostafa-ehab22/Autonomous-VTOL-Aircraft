@@ -124,7 +124,7 @@ Total Cost = C_IoT + C_Bedrock + C_StepFunctions + C_Lambda  + C_SQS + C_DynamoD
 
 | Service | Estimated Usage (1 Mission) | Estimated Cost (USD) |
 |---|:---:|:---:|
-| 🥷 IoT Core | 100 MQTT Messages *`(Cloud → Drone downlink commands via broker)`* + 2 Shadow Updates | ~$0.00010 |
+| 📡 IoT Core | 100 MQTT Messages *`(Cloud → Drone downlink commands via broker)`* + 2 Shadow Updates | ~$0.00010 |
 | 🧠 Bedrock | 300 Input + 100 Output Tokens (Nova Lite) | ~$0.00004 |
 | ⚙️ Step Functions | 12 State Transitions | ~$0.0003 |
 | ⚡ Lambda | 3 Invocations (128MB, avg. 200ms) | ~$0.000002 |
