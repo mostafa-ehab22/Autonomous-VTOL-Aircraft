@@ -435,7 +435,7 @@ cdk deploy --all
 
 ---
 
-# 🗺️ Roadmap 
+## 🗺️ Roadmap 
 
 ### Onboard System
 - [x] YOLO11 model training on Roboflow dataset
@@ -458,7 +458,7 @@ cdk deploy --all
 * **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
   
 * **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet resilience.
-
+  
 ## 📖 Documentation
 
 <div align="center">
@@ -469,8 +469,6 @@ cdk deploy --all
 | [Cloud Extension Diagram](docs/cloud_architecture.jpg) | AWS serverless backend architecture |
 | [Onboard System Diagram](docs/onboard_architecture.jpeg) | Embedded flight control & logic pipeline |
 | [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
-
-</div>
 
 </div>
 
