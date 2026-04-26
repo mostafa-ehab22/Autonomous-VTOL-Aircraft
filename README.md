@@ -1,4 +1,3 @@
-
 # 🎯 Project Overview
 ![AWS](https://img.shields.io/badge/⛅_AWS-232F3E)
 ![RaspberryPi](https://img.shields.io/badge/Raspberry_Pi-A22846?logo=raspberrypi)
@@ -436,22 +435,25 @@ cdk deploy --all
 
 ---
 
-## 🗺️ Roadmap 
+## 🚧 Active Development · Target Deployment: June 2026
 
-### Onboard System
-- [x] YOLO11 model training on Roboflow dataset
-- [x] ROS2 workspace setup with MAVLink bridge node
-- [ ] Hardware integration on Pixhawk + Raspberry Pi
-- [ ] Geofence and failsafe parameter tuning
-- [ ] SITL simulation validation
-
-### Cloud Extension
-- [x] AWS CDK infrastructure stack
+### ✅ Phase 1: Infrastructure & Intelligence (Complete)
+- [x] AWS CDK serverless infrastructure stack
 - [x] Lambda functions *(normalizer, abort, continue, acknowledge, failsafe)*
-- [x] Bedrock prompt engineering for safety classification
-- [ ] Step Functions state machine definition
-- [ ] IoT Core rules + Device Shadow integration
-- [ ] End-to-end integration test (SITL → Cloud → ACK loop)
+- [x] Bedrock AI safety classifier prompt engineering
+- [x] YOLO11 anomaly detection model trained via Roboflow
+- [x] ROS2 workspace and MAVLink bridge node established
+
+### 🔄 Phase 2: Simulation & Integration (In Progress)
+- [ ] SITL simulation validation
+- [ ] Step Functions state machine + IoT Core rules
+- [ ] End-to-end pipeline test (SITL → IoT Core → Step Functions → ACK)
+- [ ] Geofence and failsafe parameter tuning
+
+### ⏳ Phase 3: Hardware & Competition (Target: June 2026)
+- [ ] Physical integration on Pixhawk + Raspberry Pi
+- [ ] Real-world telemetry streaming and flight testing
+- [ ] **International Competition of the Military Technical College (ICMTC 2026), Egypt** 🏆
 
 ## 🔭 Future Optimizations (Post-V1)
 * **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
