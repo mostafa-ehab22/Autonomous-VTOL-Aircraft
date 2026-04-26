@@ -444,16 +444,16 @@ cdk deploy --all
 - [x] YOLO11 anomaly detection model trained via Roboflow
 - [x] ROS2 workspace and MAVLink bridge node established
 
-### 🔄 Phase 2: Simulation & Integration (In Progress)
+### 🔄 Phase 2: Simulation & Integration (Current Sprint)
 - [ ] SITL simulation validation
 - [ ] Step Functions state machine + IoT Core rules
 - [ ] End-to-end pipeline test (SITL → IoT Core → Step Functions → ACK)
 - [ ] Geofence and failsafe parameter tuning
 
-### ⏳ Phase 3: Hardware & Competition (Target: June 2026)
+### ⏳ Phase 3: Hardware & Competition
 - [ ] Physical integration on Pixhawk + Raspberry Pi
 - [ ] Real-world telemetry streaming and flight testing
-- [ ] **International Competition of the Military Technical College (ICMTC 2026), Egypt** 🏆
+- [ ] **International Competition of the Military Technical College 2026, Egypt** 🏆
 
 ## 🔭 Future Optimizations (Post-V1)
 * **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
