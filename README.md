@@ -72,8 +72,9 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🤔 Why a Cloud Extension?
 
-Architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system, without touching the onboard flight stack. By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, each layer is free to evolve independently:
+Architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system, without touching the onboard flight stack. 
 
+By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, each layer is free to evolve independently:
 - **Onboard (Reflexes):** Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.
 - **Cloud (Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
 
