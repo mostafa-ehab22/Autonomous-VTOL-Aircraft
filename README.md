@@ -451,6 +451,7 @@ cdk deploy --all
 - [ ] Geofence and failsafe parameter tuning
 
 ### ⏳ Phase 3: Hardware & Competition
+- [ ] Aircraft manufacturing and airframe assembly
 - [ ] Physical integration on Pixhawk + Raspberry Pi
 - [ ] Real-world telemetry streaming and flight testing
 - [ ] **International Competition of the Military Technical College 2026, Egypt** 🏆
