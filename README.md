@@ -8,7 +8,7 @@ Autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **on
 
 Designed to scale from one aircraft to a **fleet of thousands** with **zero architectural changes**.
  
-## 🧩 Dual-Component Architecture:
+## 🧩 Dual-Component System
   
 <div align="center">
   
