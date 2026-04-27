@@ -22,7 +22,7 @@ Designed to scale from one aircraft to a **fleet of thousands** with **zero arch
 </div>
 
 > [!IMPORTANT]
-Both parts are **independent by design**. Enabling **horizontal scaling** with **no code modifications**.
+Both parts are **independent by design**, enabling **horizontal scaling** with **no code modifications**.
 
 
 <div align="center">
