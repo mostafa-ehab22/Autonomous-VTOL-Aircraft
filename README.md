@@ -4,7 +4,7 @@
 ![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
 ![ArduPilot](https://img.shields.io/badge/🛩️_ArduPilot-B8860B)
 
-Autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard embedded flight control** with a **stateless event-driven AWS serverless cloud extension** for AI-driven mission decision making. Time-critical flight reflexes remain local and deterministic, while strategic mission decisions are delegated to cloud-level AI reasoning.
+Autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard embedded flight control** with a **stateless event-driven AWS serverless cloud extension** for AI-driven mission decision making. **Split-second flight reflexes** remain local and deterministic, while **strategic mission intelligence** is powered by cloud-level AI.?
 
 Designed to scale from one aircraft to a **fleet of thousands** with **zero architectural changes**.
  
@@ -72,9 +72,9 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🤔 Why a Cloud Extension?
 
-The Cloud Extension was architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system without touching the onboard flight stack.
+The Cloud Extension was architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system, without touching the onboard flight stack.
 
-By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, the aircraft's "reflexes" remain local and deterministic, while its "decisions" benefit from LLM-level reasoning, durable state persistence, and fleet-scale orchestration.
+By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, each layer is free to evolve independently. The onboard stack optimizes for determinism and latency, while the cloud layer gains LLM-level reasoning, durable state persistence, and fleet-scale orchestration.
 
 <div align="center">
 
