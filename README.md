@@ -475,7 +475,7 @@ cdk deploy --all
 
 ## 🤝 Contributing
 
-This is an active project. Issues and suggestions are welcome - feel free to open an issue for discussion.
+This is an active project. Issues and suggestions are welcome, feel free to open an issue for discussion.
 
 ## ⚖️ License
 
@@ -484,5 +484,5 @@ Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more inform
 ---
 
 <div align="center">
-  <sub>Built at Faculty of Engineering, Alexandria University, Egypt: Autonomous VTOL × AWS Serverless</sub>
+  <sub>Built with <a href="https://www.lycansteam.com/">Lycans AeroDesign Team</a> · Faculty of Engineering, Alexandria University</sub>
 </div>
