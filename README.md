@@ -32,7 +32,7 @@ Both parts are **independent by design**, enabling **horizontal scaling** with *
 </div>
 
 <div align="center">
-  <img src="docs/onboard_architecture.jpeg" alt="Onboard Architecture" width="99%"/>
+  <img src="docs/VTOL_system_v2.png" alt="Onboard Architecture" width="99%"/>
 </div>
 
 ## 🧱 System Architecture
