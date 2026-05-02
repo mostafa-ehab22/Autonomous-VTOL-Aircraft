@@ -432,7 +432,7 @@ cdk deploy --all
 
 ---
 
-## 🚧 Active Development · Target Deployment: June 2026
+## 🚧 Project Phases · Target Deployment: June 2026
 
 ### ✅ Phase 1: Infrastructure & Intelligence (Complete)
 - [x] AWS CDK serverless infrastructure stack
