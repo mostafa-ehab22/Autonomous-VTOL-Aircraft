@@ -484,5 +484,5 @@ Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more inform
 ---
 
 <div align="center">
-  <sub>Built with <a href="https://www.lycansteam.com/">Lycans AeroDesign Team</a> · Faculty of Engineering, Alexandria University</sub>
+  <sub>Built with <a href="https://www.lycansteam.com/">Lycans AeroDesign Team</a> · Alexandria University</sub>
 </div>
