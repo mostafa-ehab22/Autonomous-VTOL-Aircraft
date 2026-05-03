@@ -307,7 +307,7 @@ Step Functions Pipeline → CATCH: Any Cloud Error
 → END
 ```
 
-## 🌊 End-to-End System Flow: The Life of a Telemetry Packet
+## 🌊 End-to-End System Flow: Life of a Telemetry Packet
 
 The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
 
@@ -453,7 +453,7 @@ cdk deploy --all
 - [ ] Aircraft manufacturing and airframe assembly
 - [ ] Physical integration on Pixhawk + Raspberry Pi
 - [ ] Real-world telemetry streaming and flight testing
-- [ ] **International Competition of the Military Technical College 2026, Egypt** 🏆
+- [ ] **International Competition of Military Technical College 2026, Egypt** 🏆
 
 ## 🔭 Future Optimizations (Post-V1)
 * **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
