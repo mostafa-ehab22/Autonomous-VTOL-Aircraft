@@ -211,7 +211,7 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 - No model artifact versioning overhead
 - Team focus stays on **mission integration**, not infrastructure
 
-### 🛡️ Bedrock Classifier System Prompt
+### 🛡️ Classifier System Prompt
 
 Injected directly at the Bedrock layer, it hardcodes the aircraft's physical flight limits and guarantees JSON-compliant output for Step Functions:
 
