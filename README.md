@@ -4,7 +4,7 @@
 ![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
 ![ArduPilot](https://img.shields.io/badge/🛩️_ArduPilot-B8860B)
 
-Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard embedded flight control** with a **stateless event-driven AWS serverless cloud extension** for AI-driven mission decision making.
+Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard embedded flight control** with a **stateless AWS serverless cloud extension** for AI-driven mission decision making.
 
 **Split-second flight reflexes** remain local and deterministic, while **strategic mission intelligence** is powered by cloud-level AI.
 
