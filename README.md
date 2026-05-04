@@ -310,6 +310,9 @@ Step Functions Pipeline → CATCH: Any Cloud Error
 ## 🌊 End-to-End System Flow: Life of a Telemetry Packet
 
 The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
+<div align="center">
+  <img src="docs/telemetry_packet.png" alt="Onboard Architecture" width="99%"/>
+</div>
 
 ### 👀 Sense (Edge)
 - **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
@@ -471,6 +474,7 @@ cdk deploy --all
 | [Source Files & Full Assets](docs/) | **Technical Source:** `.drawio` diagram and detailed guides |
 | [Onboard System Diagram](docs/VTOL_system_v2.png) | Embedded flight control & logic pipeline |
 | [Cloud Extension Diagram](docs/cloud_architecture.jpg) | AWS serverless backend architecture |
+| [Telemetry Flow Diagram](docs/telemetry_packet.png) | End-to-end lifecycle of a single mission decision |
 | [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
 
 </div>
