@@ -310,6 +310,9 @@ Step Functions Pipeline → CATCH: Any Cloud Error
 ## 🌊 End-to-End System Flow: Life of a Telemetry Packet
 
 The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
+<div align="center">
+  <img src="docs/telemetry_packet.png" alt="Onboard Architecture" width="99%"/>
+</div>
 
 ### 👀 Sense (Edge)
 - **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
