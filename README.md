@@ -311,7 +311,7 @@ Step Functions Pipeline → CATCH: Any Cloud Error
 
 The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
 <div align="center">
-  <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
+  <img src="docs/telemetry_packet2.png" alt="Telemetry Packet Flow" width="99%"/>
 </div>
 
 ### 👀 Sense (Edge)
