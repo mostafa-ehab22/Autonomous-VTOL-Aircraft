@@ -451,7 +451,7 @@ cdk deploy --all
 - [ ] End-to-end pipeline test (SITL → IoT Core → Step Functions → ACK)
 - [ ] Geofence and failsafe parameter tuning
 
-### ⏳ Phase 3: Hardware & Competition
+### ⏳ Phase 3: Airframe Assembly & Flight Testing 
 - [ ] Aircraft manufacturing and airframe assembly
 - [ ] Physical integration on Pixhawk + Raspberry Pi
 - [ ] Real-world telemetry streaming and flight testing
