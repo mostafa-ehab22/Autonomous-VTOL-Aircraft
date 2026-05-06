@@ -455,7 +455,6 @@ cdk deploy --all
 - [ ] Aircraft manufacturing and airframe assembly
 - [ ] Physical integration on Pixhawk + Raspberry Pi
 - [ ] Real-world telemetry streaming and flight testing
-- [ ] **International Competition of Military Technical College 2026, Egypt** 🏆
 
 ## 🔭 Future Optimizations
 * **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
