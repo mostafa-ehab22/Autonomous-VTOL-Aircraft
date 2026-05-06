@@ -30,7 +30,7 @@ Both parts are **independent by design**, enabling **horizontal scaling** with *
 
 The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
 <div align="center">
-  <img src="docs/telemetry_packet2.png" alt="Telemetry Packet Flow" width="99%"/>
+  <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
 </div>
 
 ### 👀 Sense (Edge)
@@ -473,7 +473,7 @@ cdk deploy --all
 | [Source Files & Full Assets](docs/) | **Technical Source:** `.drawio` diagram and detailed guides |
 | [Onboard System Diagram](docs/VTOL_system_v2.png) | Embedded flight control & logic pipeline |
 | [Cloud Extension Diagram](docs/cloud_architecture.jpg) | AWS serverless backend architecture |
-| [Telemetry Flow Diagram](docs/telemetry_packet2.png) | End-to-end lifecycle of a single mission decision |
+| [Telemetry Flow Diagram](docs/telemetry_packet.png) | End-to-end lifecycle of a single mission decision |
 | [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
 
 </div>
