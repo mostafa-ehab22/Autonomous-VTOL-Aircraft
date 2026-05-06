@@ -26,6 +26,45 @@ Designed to scale from one aircraft to a **fleet of thousands** with **zero arch
 > [!IMPORTANT]
 Both parts are **independent by design**, enabling **horizontal scaling** with **no code modifications**.
 
+## 🔄 Edge-to-Cloud Pipeline
+
+The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
+<div align="center">
+  <img src="docs/telemetry_packet2.png" alt="Telemetry Packet Flow" width="99%"/>
+</div>
+
+### 👀 Sense (Edge)
+- **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
+- **Pixhawk (ArduPilot)** simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
+
+### 📡 Package & Transmit (Bridge)
+- The **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
+- Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core**: the single handoff point between edge and cloud.
+
+### 📥 Buffer & Trigger (Cloud Entry)
+- IoT Core routes the payload into the **Amazon SQS Mission Queue**, absorbing any network reconnect spikes.
+- **EventBridge Pipes** polls the queue and triggers the **AWS Step Functions** state machine *(no intermediary Lambda required)*.
+
+### 🧠 Reason & Decide (Cloud Brain)
+- Step Functions invokes **Amazon Bedrock (Nova Lite)** with the telemetry JSON for safety classification.
+- Bedrock returns: `{"verdict": "Abort", "confidence": 0.92}`.
+- Since `confidence ≥ 0.75`, the verdict is trusted. Step Functions routes down the `UNSAFE` path.
+
+### 🚨 Alert & Command (Cloud Exit)
+- **Abort Lambda** updates the **IoT Device Shadow** `desired` state to `ABORT`, embedding a `.waitForTaskToken`.
+- **SNS** fires an immediate alert to the pilot's mobile/email.
+- Step Functions pauses, waiting for physical confirmation from the aircraft.
+
+### ⚡ Act (Edge Reflex)
+- The ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
+- Translates `ABORT` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
+- Pixhawk takes physical control and executes the abort maneuver.
+
+### ✅ Acknowledge (Loop Closes)
+- The ROS2 node publishes an MQTT ACK back to **IoT Core**.
+- An **IoT Rule** triggers the **Acknowledge Lambda** with the task token.
+- **Acknowledge Lambda** calls `SendTaskSuccess`, resuming Step Functions execution.
+- Execution logs the confirmed abort to **DynamoDB** and reaches `END`.
 
 <div align="center">
 
@@ -307,46 +346,6 @@ Step Functions Pipeline → CATCH: Any Cloud Error
 → END
 ```
 
-## 🌊 End-to-End System Flow: Life of a Telemetry Packet
-
-The complete lifecycle of a single mission decision, from raw sensor data to physical motor response:
-<div align="center">
-  <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
-</div>
-
-### 👀 Sense (Edge)
-- **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
-- **Pixhawk (ArduPilot)** simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
-
-### 📡 Package & Transmit (Bridge)
-- The **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
-- Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core**: the single handoff point between edge and cloud.
-
-### 📥 Buffer & Trigger (Cloud Entry)
-- IoT Core routes the payload into the **Amazon SQS Mission Queue**, absorbing any network reconnect spikes.
-- **EventBridge Pipes** polls the queue and triggers the **AWS Step Functions** state machine *(no intermediary Lambda required)*.
-
-### 🧠 Reason & Decide (Cloud Brain)
-- Step Functions invokes **Amazon Bedrock (Nova Lite)** with the telemetry JSON for safety classification.
-- Bedrock returns: `{"verdict": "Abort", "confidence": 0.92}`.
-- Since `confidence ≥ 0.75`, the verdict is trusted. Step Functions routes down the `UNSAFE` path.
-
-### 🚨 Alert & Command (Cloud Exit)
-- **Abort Lambda** updates the **IoT Device Shadow** `desired` state to `ABORT`, embedding a `.waitForTaskToken`.
-- **SNS** fires an immediate alert to the pilot's mobile/email.
-- Step Functions pauses, waiting for physical confirmation from the aircraft.
-
-### ⚡ Act (Edge Reflex)
-- The ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
-- Translates `ABORT` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
-- Pixhawk takes physical control and executes the abort maneuver.
-
-### ✅ Acknowledge (Loop Closes)
-- The ROS2 node publishes an MQTT ACK back to **IoT Core**.
-- An **IoT Rule** triggers the **Acknowledge Lambda** with the task token.
-- **Acknowledge Lambda** calls `SendTaskSuccess`, resuming Step Functions execution.
-- Execution logs the confirmed abort to **DynamoDB** and reaches `END`.
-
 ## 🌉 Integration: How Onboard Meets Cloud
 
 The bridge between the two systems is a single well-defined interface:
@@ -474,7 +473,7 @@ cdk deploy --all
 | [Source Files & Full Assets](docs/) | **Technical Source:** `.drawio` diagram and detailed guides |
 | [Onboard System Diagram](docs/VTOL_system_v2.png) | Embedded flight control & logic pipeline |
 | [Cloud Extension Diagram](docs/cloud_architecture.jpg) | AWS serverless backend architecture |
-| [Telemetry Flow Diagram](docs/telemetry_packet.png) | End-to-end lifecycle of a single mission decision |
+| [Telemetry Flow Diagram](docs/telemetry_packet2.png) | End-to-end lifecycle of a single mission decision |
 | [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
 
 </div>
