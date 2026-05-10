@@ -38,7 +38,7 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - **Pixhawk (ArduPilot)** simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
 
 ### 📡 Package & Transmit (Bridge)
-- The **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
+- **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
 - Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core**: the single handoff point between edge and cloud.
 
 ### 📥 Buffer & Trigger (Cloud Entry)
