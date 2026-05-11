@@ -56,12 +56,12 @@ The complete lifecycle of a single mission decision, from raw sensor data to phy
 - Step Functions pauses, waiting for physical confirmation from the aircraft.
 
 ### ⚡ Act (Edge Reflex)
-- The ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
+- ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
 - Translates `ABORT` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
 - Pixhawk takes physical control and executes the abort maneuver.
 
 ### ✅ Acknowledge (Loop Closes)
-- The ROS2 node publishes an MQTT ACK back to **IoT Core**.
+- ROS2 node publishes an MQTT ACK back to **IoT Core**.
 - An **IoT Rule** triggers the **Acknowledge Lambda** with the task token.
 - **Acknowledge Lambda** calls `SendTaskSuccess`, resuming Step Functions execution.
 - Execution logs the confirmed abort to **DynamoDB** and reaches `END`.
