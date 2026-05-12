@@ -28,7 +28,7 @@ Both parts are **independent by design**, enabling **horizontal scaling** with *
 
 ## 🔄 Edge-to-Cloud Pipeline
 
-The complete lifecycle of a single mission decision, from raw edge telemetry to a confirmed motor response and a persistent cloud record:
+Lifecycle of a single mission decision, from raw edge telemetry to a confirmed motor response and a persistent cloud record:
 <div align="center">
   <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
 </div>
