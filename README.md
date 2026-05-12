@@ -35,7 +35,7 @@ Lifecycle of a mission decision, from raw edge telemetry to a confirmed motor re
 
 ### 👀 Sense (Edge)
 - **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
-- **Pixhawk (ArduPilot)** simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
+- **ArduPilot** (on Pixhawk) simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
 
 ### 📡 Package & Transmit (Bridge)
 - **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
