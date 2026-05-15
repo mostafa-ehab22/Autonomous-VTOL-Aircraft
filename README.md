@@ -68,7 +68,7 @@ Lifecycle of a mission decision, from raw edge telemetry to a confirmed motor re
 
 <div align="center">
 
-# ✈️ Part 1: Autonomous VTOL System 
+# ✈️ Part 1: Autonomous VTOL Architecture
 
 </div>
 
@@ -103,7 +103,7 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 <div align="center">
 
-# 🌥️ Part 2: Cloud Extension System
+# 🌥️ Part 2: Cloud Extension Architecture
 
 <div align="center">
   <img src="docs/cloud_architecture.jpg" alt="Cloud Architecture" width="99%"/>
