@@ -400,7 +400,7 @@ AUTONOMOUS-VTOL-AIRCRAFT/
 ├── 📖 docs/
 │   ├── AWS_VTOL.drawio                # Editable Architecture Source
 │   ├── cloud_architecture.jpg
-│   ├── onboard_architecture.png
+│   ├── onboard_architecture.jpg
 │   ├── telemetry_packet.png
 │   └── integration_guide.md
 │ 
