@@ -73,7 +73,7 @@ Lifecycle of a mission decision, from raw edge telemetry to a confirmed motor re
 </div>
 
 <div align="center">
-  <img src="docs/onboard_architecture.png" alt="Onboard Architecture" width="99%"/>
+  <img src="docs/onboard_architecture.jpeg" alt="Onboard Architecture" width="99%"/>
 </div>
 
 ## 🧱 System Architecture
@@ -472,7 +472,7 @@ cdk deploy --all
 | Document | Description |
 | :--- | :--- |
 | [Source Files & Full Assets](docs/) | **Technical Source:** `.drawio` diagram and detailed guides |
-| [Onboard System Diagram](docs/onboard_architecture.png) | Embedded flight control & logic pipeline |
+| [Onboard System Diagram](docs/onboard_architecture.jpeg) | Embedded flight control & logic pipeline |
 | [Cloud Extension Diagram](docs/cloud_architecture.jpg) | AWS serverless backend architecture |
 | [Telemetry Flow Diagram](docs/telemetry_packet.png) | End-to-end lifecycle of a single mission decision |
 | [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
