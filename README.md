@@ -73,7 +73,7 @@ Lifecycle of a mission decision, from raw edge telemetry to a confirmed motor re
 </div>
 
 <div align="center">
-  <img src="docs/onboard_architecture.png" alt="Onboard Architecture" width="99%"/>
+  <img src="docs/onboard_architecture.jpeg" alt="Onboard Architecture" width="99%"/>
 </div>
 
 ## 🧱 System Architecture
