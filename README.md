@@ -28,7 +28,8 @@ Both parts are **independent by design**, enabling **horizontal scaling** with *
 
 ## 🔄 Edge-to-Cloud Pipeline
 
-Lifecycle of a mission decision, from raw edge telemetry to a confirmed motor response and a persistent cloud record:
+Tracing a single ABORT decision across seven stations: from edge anomaly detection to confirmed motor response and persistent cloud record.
+
 <div align="center">
   <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
 </div>
