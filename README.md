@@ -437,26 +437,6 @@ cdk deploy --all
 
 ---
 
-## 🚧 Project Phases · Target Deployment: June 2026
-
-### ✅ Phase 1: Infrastructure & Intelligence (Complete)
-- [x] AWS CDK serverless infrastructure stack
-- [x] Lambda functions *(normalizer, abort, continue, acknowledge, failsafe)*
-- [x] Bedrock AI safety classifier prompt engineering
-- [x] YOLO11 anomaly detection model trained via Roboflow
-- [x] ROS2 workspace and MAVLink bridge node established
-
-### 🔄 Phase 2: Simulation & Integration (Current Sprint)
-- [ ] SITL simulation validation
-- [ ] Step Functions state machine + IoT Core rules
-- [ ] End-to-end pipeline test (SITL → IoT Core → Step Functions → ACK)
-- [ ] Geofence and failsafe parameter tuning
-
-### ⏳ Phase 3: Airframe Assembly & Flight Testing 
-- [ ] Aircraft manufacturing and airframe assembly
-- [ ] Physical integration on Pixhawk + Raspberry Pi
-- [ ] Real-world telemetry streaming and flight testing
-
 ## 🔭 Future Optimizations
 * **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
   
