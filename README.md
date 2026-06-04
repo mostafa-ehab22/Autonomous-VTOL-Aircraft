@@ -6,7 +6,7 @@
 
 Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard embedded flight control** with a **stateless AWS serverless cloud extension** for AI-driven mission decision making.
 
-**Split-second flight reflexes** remain local and deterministic, while **strategic mission intelligence** is powered by cloud-level AI.
+**Split-second flight reflexes** remain local, while **strategic mission intelligence** is powered by cloud-level AI.
 
 Designed to scale from one aircraft to a **fleet of thousands** with **zero architectural changes**.
  
