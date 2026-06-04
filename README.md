@@ -2,7 +2,7 @@
 ![AWS](https://img.shields.io/badge/⛅_AWS-232F3E)
 ![RaspberryPi](https://img.shields.io/badge/Raspberry_Pi-A22846?logo=raspberrypi)
 ![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
-![ArduPilot](https://img.shields.io/badge/🛩️_ArduPilot-B8860B)
+![ArduPilot](https://img.shields.io/badge/ArduPilot-B8860B?logo=drone&logoColor=white)
 
 Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard flight control** with a **stateless AWS serverless cloud extension** for AI-driven mission decision-making.
 
