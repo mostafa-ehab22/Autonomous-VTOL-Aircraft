@@ -310,7 +310,7 @@ OUTPUT CONSTRAINTS:
 
 ## 🔄 Mission Execution Paths
 
-**✅ Safe Path** *(2 Lambda Invocations)***:**
+### ✅ Safe Path *(2 Lambda Invocations)*:
 ```
 Safety Check → SAFE
 → Amazon SNS (Log Mission Topic)
@@ -319,9 +319,8 @@ Safety Check → SAFE
 → Continue Mission (Report ACTIVE → Device Shadow)
 → END
 ```
-<br>
 
-**❌ Unsafe Path** *(3 Lambda Invocations)***:**
+### ❌ Unsafe Path *(3 Lambda Invocations)*:
 ```
 Safety Check → UNSAFE
 → Dispatch Abort Command (Send ABORT + Task Token → Device Shadow)
@@ -337,9 +336,7 @@ Safety Check → UNSAFE
 > - Task token is embedded in the command sent to the VTOL. <br>
 > - VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution of workflow.
 
-<br>
-
-⚠️ **Cloud Failsafe Path** *(2 Lambda Invocations)***:**
+### ⚠️ Cloud Failsafe Path *(2 Lambda Invocations)*:
 ```
 Step Functions Pipeline → CATCH: Any Cloud Error
 → Execute Failsafe (RTL_TRIGGERED → Device Shadow)
