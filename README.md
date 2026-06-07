@@ -124,7 +124,7 @@ The aircraft is autonomous at the **reflex level**, but a single Raspberry Pi ru
 | **Static Thresholds:** Each parameter checked in isolation, compound failure modes pass every individual check undetected | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry combinations for context-aware safety verdicts |
 | **Volatile Storage:** A mid-mission reboot wipes telemetry history, mission state, and flight logs permanently | 🗄️ **DynamoDB** | Continuous off-board streaming ensures mission data survives airframe destruction |
 | **Dropped Commands:** Network blips silently discard instructions with no retry or delivery guarantee | 📨 **SQS + DLQ** | Decoupled queue guarantees command delivery despite network volatility |
-| **Ephemeral State:** Reconnection after a network drop starts from zero with no prior mission context | 🥷🏻 **IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
+| **Ephemeral State:** Reconnection after a network drop starts with no prior mission context | 🥷🏻 **IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
 | **Isolated Alerts:** Safety warnings confined to local ground station with no remote visibility | 🔔 **SNS** | Push notifications (Mobile/Email) instantly reach all stakeholders on any safety breach |
 
 </div>
