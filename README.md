@@ -161,9 +161,9 @@ Total Cost = C_IoT + C_Bedrock + C_StepFunctions + C_Lambda  + C_SQS + C_DynamoD
 
 To maintain this efficiency, the architecture relies on four core optimizations:
 
-- **Strategic Model Selection:** <br> Amazon Nova Lite over Claude Sonnet **cuts inference cost by ~98%** `($0.06 vs $3.00 per 1M tokens)`
-
 - **Asymmetric Telemetry Routing:** <br> High-frequency uplink telemetry `Drone → Cloud` bypasses the MQTT broker entirely via **Basic Ingest**, **eliminating 100% of ingestion fees**. Only critical downlink commands `Cloud → Drone` draw from the AWS IoT Core budget.
+  
+- **Strategic Model Selection:** <br> Amazon Nova Lite over Claude Sonnet **cuts inference cost by ~98%** `($0.06 vs $3.00 per 1M tokens)`
   
 - **Token Efficiency:** <br> Telemetry adopts a compact JSON schema, strictly capping Bedrock input at **~300 tokens per inference request**.
 
