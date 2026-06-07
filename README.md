@@ -308,7 +308,7 @@ OUTPUT CONSTRAINTS:
 > - **Cloud Timeout:** No verdict is received within `3 seconds`, ROS 2 controller triggers local **RTL** independently.
 > - **Low Confidence:** Verdict confidence `< 0.75` is automatically treated as `Abort` by ROS 2 controller.
 
-## 🔄 Mission Workflow Detail
+## 🔄 Mission Execution Paths
 
 **✅ Safe Path** *(2 Lambda Invocations)***:**
 ```
