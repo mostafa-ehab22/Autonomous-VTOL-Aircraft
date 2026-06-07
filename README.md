@@ -420,7 +420,7 @@ cdk deploy --all
 
 - **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet resilience.
 
-- **Predictive Trend Classification:** <br> Extend Normalizer Lambda to query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches gradual degradation before any threshold is crossed.
+- **Predictive Trend Classification:** <br> Extend Normalizer Lambda to query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches degradation before any threshold is crossed.
 
 ## 📖 Documentation
 
