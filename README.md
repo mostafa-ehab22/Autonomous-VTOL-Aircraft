@@ -22,7 +22,7 @@ Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combinin
 </div>
 
 > [!IMPORTANT]
-Both parts are **independent by design**, enabling **horizontal scaling** with **no code modifications**.
+Both components are **independent by design**, enabling **horizontal scaling** with **no code modifications**.
 
 ## 🔄 Edge-to-Cloud Pipeline
 
