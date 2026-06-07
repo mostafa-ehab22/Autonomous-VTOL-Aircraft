@@ -112,17 +112,10 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🤔 Why a Cloud Extension?
 
-The aircraft is autonomous at the **reflex level**, but a single Raspberry Pi running hardcoded thresholds, with no persistent storage and no communication beyond the local ground station, cannot reason about compound failures, survive a reboot, coordinate a fleet, or reach a pilot when it matters most. This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach.
-
-By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, each layer is free to evolve independently:
-- **Onboard (Reflexes):** Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.
-- **Cloud (Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
-
-## 🤔 Why a Cloud Extension?
-
 The aircraft is autonomous at the **reflex level**, but a single Raspberry Pi running hardcoded thresholds, with no persistent storage and no communication beyond the local ground station, cannot reason about compound failures, survive a reboot, coordinate a fleet, or reach a pilot when it matters most.
 
-This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach:
+> [!IMPORTANT]
+> This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach.
 
 <div align="center">
 
