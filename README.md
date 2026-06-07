@@ -214,8 +214,6 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 
 While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the **Strategic Safety Classifier** at the cloud decision layer for the following reasons:
 
-### 🏗️ Foundation vs. Custom
-
 <div align="center">
 
 | Architectural Pillar | ⛅ Amazon Bedrock (Selected) | 🧪 SageMaker Serverless |
@@ -224,15 +222,9 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 | **Inference Latency** | **No cold-start**; critical for **sub-second** safety audits | **5–10s cold-start** risk; unacceptable for time-critical safety decisions |
 | **Fleet Scalability** | **Native elasticity**; handles concurrent multi-drone swarms instantly | Concurrency bottlenecks trigger cold starts under **burst traffic** |
 | **Model Access** | Immediate access to **Nova / Claude FMs** | Restricted to custom weights and manual open-source hosting |
+| **Cost** | **$0.00 idle cost**; pure pay-as-you-fly billing, no containers, no versioning overhead | Fixed endpoint costs regardless of usage |
 
 </div>
-
-### 💰 Cost & Simplicity
-
-- **$0.00 idle cost**: pure **"Pay-as-you-fly"** billing model
-- No containerized inference logic to maintain
-- No model artifact versioning overhead
-- Team focus stays on **mission integration**, not infrastructure
 
 ### 🛡️ Classifier System Prompt
 
