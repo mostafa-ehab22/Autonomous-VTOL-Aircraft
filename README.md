@@ -217,7 +217,7 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 <div align="center">
 
 | Architectural Pillar | ⛅ Amazon Bedrock (Selected) | 🧪 SageMaker Serverless |
-|---|---|---|
+|:---:|---|---|
 | **Deployment & MLOps** | Managed API with **zero infrastructure** or container maintenance | Requires **Docker**, custom endpoints, and model versioning |
 | **Inference Latency** | **No cold-start**; critical for **sub-second** safety audits | **5-10s cold-start** risk; unacceptable for time-critical safety decisions |
 | **Fleet Scalability** | **Native elasticity**; handles concurrent multi-drone swarms instantly | Concurrency bottlenecks trigger cold starts under **burst traffic** |
