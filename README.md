@@ -182,7 +182,7 @@ To maintain this efficiency, the architecture relies on four core optimizations:
 
 - 📡 **Asymmetric Telemetry Routing:** <br> High-frequency uplink telemetry `Drone → Cloud` bypasses the MQTT broker entirely via **Basic Ingest**, **eliminating 100% of ingestion fees**. Only critical downlink commands `Cloud → Drone` draw from the AWS IoT Core budget.
   
-- 🔢 **Token Efficiency:** <br> Telemetry is constrained to a compact JSON schema, strictly capping Bedrock input at **~300 tokens per inference request**.
+- 🪙 **Token Efficiency:** <br> Telemetry adopts a compact JSON schema, strictly capping Bedrock input at **~300 tokens per inference request**.
 
 - 🗑️ **Ephemeral Log Retention:** <br> CloudWatch logs configured with a **7-day expiration**, preventing storage costs from accumulating over time.
 
