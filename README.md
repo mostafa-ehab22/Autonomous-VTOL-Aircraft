@@ -305,8 +305,8 @@ OUTPUT CONSTRAINTS:
 
 > [!WARNING]
 > *Aircraft safety is **never fully delegated to the cloud:***
-> - **Cloud Timeout:** No verdict is received within `3 seconds`, ROS 2 controller triggers local **RTL** independently.
-> - **Low Confidence:** Verdict confidence `< 0.75` is automatically treated as `Abort` by ROS 2 controller.
+> - **Cloud Timeout:** No verdict is received within `3 seconds`, ROS2 controller triggers local **RTL** independently.
+> - **Low Confidence:** Verdict confidence `< 0.75` is automatically treated as `Abort` by ROS2 controller.
 
 ## 🔄 Mission Execution Paths
 
