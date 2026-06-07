@@ -112,37 +112,27 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🤔 Why a Cloud Extension?
 
-Architected to transition the aircraft from a standalone prototype into a resilient, fleet-ready system, without touching the onboard flight stack. 
+The aircraft is autonomous at the **reflex level**, but a single Raspberry Pi running hardcoded thresholds, with no persistent storage and no communication beyond the local ground station, cannot reason about compound failures, survive a reboot, coordinate a fleet, or reach a pilot when it matters most. This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach.
 
 By separating **Tactical Flight Logic** from **Strategic Mission Intelligence**, each layer is free to evolve independently:
 - **Onboard (Reflexes):** Time-critical YOLO11 inference, deterministic ROS2, and low-latency flight safety.
 - **Cloud (Strategy):** Mission-level AI reasoning, global state persistence, and cross-platform fleet orchestration.
 
-<div align="center">
+## 🤔 Why a Cloud Extension?
 
-| Responsibility | Before (Pi Only) | After (Cloud Extension) |
-|---|:---:|:---:|
-| 🧠 Strategic mission reasoning | Static rule-based logic | **AWS Bedrock (AI)** |
-| 📋 State & mission logging | Local files / SQLite | **DynamoDB** |
-| 🔔 Pilot notifications | Ground Control Station only | **SNS (Mobile/Email)** |
-| 🔄 Mission state management | In-memory / local | **Device Shadow (with offline sync)** |
-| 📨 Message reliability | None | **SQS + Dead Letter Queue** |
+The aircraft is autonomous at the **reflex level**, but a single Raspberry Pi running hardcoded thresholds, with no persistent storage and no communication beyond the local ground station, cannot reason about compound failures, survive a reboot, coordinate a fleet, or reach a pilot when it matters most.
 
-</div>
-
-## 🔍 Architectural Impact
-
-This is not a simple compute offload. **Every responsibility delegated to AWS eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach:
+This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode** that would otherwise endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach:
 
 <div align="center">
 
 | Edge Vulnerability | ☁️ Cloud Mitigation | System Impact |
 |---|:---:|---|
-| **Static Thresholds:** Abort decisions relied on hardcoded rules, not contextual reasoning | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry for context-aware safety verdicts |
-| **Volatile Storage:** Telemetry lost permanently on physical crash | 🗄️ **DynamoDB** | Continuous off-board streaming ensures data survives airframe destruction |
-| **Dropped Commands:** Network blips silently discard instructions with no retry | 📨 **SQS + DLQ** | Decoupled queue guarantees command delivery despite network volatility |
-| **Ephemeral State:** Mid-air compute reboot causes complete mission state loss | 🥷🏻 **IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
-| **Isolated Alerts:** Safety warnings confined to local ground station | 🔔 **SNS** | Push notifications (Mobile/Email) instantly reach all stakeholders on any safety breach |
+| **Static Thresholds:** Each parameter checked in isolation, compound failure modes pass every individual check undetected | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry combinations for context-aware safety verdicts |
+| **Volatile Storage:** A mid-mission reboot wipes telemetry history, mission state, and flight logs permanently | 🗄️ **DynamoDB** | Continuous off-board streaming ensures mission data survives airframe destruction |
+| **Dropped Commands:** Network blips silently discard instructions with no retry or delivery guarantee | 📨 **SQS + DLQ** | Decoupled queue guarantees command delivery despite network volatility |
+| **Ephemeral State:** Reconnection after a network drop starts from zero with no prior mission context | 🥷🏻 **IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
+| **Isolated Alerts:** Safety warnings confined to local ground station with no remote visibility | 🔔 **SNS** | Push notifications (Mobile/Email) instantly reach all stakeholders on any safety breach |
 
 </div>
 
