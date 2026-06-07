@@ -438,7 +438,7 @@ cdk deploy --all
 ---
 
 ## 🔭 Future Optimizations
-* **Predictive Trend Classification:** <br> Extend the Normalizer Lambda to query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches gradual degradation *(battery drain rate, creeping wind resistance)* before any threshold is crossed.
+* **Predictive Trend Classification:** <br> Extend the Normalizer Lambda to query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches gradual degradation before any threshold is crossed.
 
 * **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
   
