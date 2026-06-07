@@ -131,7 +131,7 @@ The aircraft is autonomous at the **reflex level**, but a single Raspberry Pi ru
 
 ## 💰 Cost Analysis
 
-This entire cloud architecture is designed with a **"Pay-as-you-go" serverless model**. By utilizing event-driven triggers, no infrastructure runs 24/7 and no idle containers. When the fleet is grounded, the cost is **$0.00**.
+This entire cloud architecture runs on a **"Pay-as-you-go" serverless model**: no infrastructure runs 24/7, no idle containers, and when the fleet is grounded, the cost is **$0.00**.
 
 ### 📉 Estimated Cost per Flight
 
