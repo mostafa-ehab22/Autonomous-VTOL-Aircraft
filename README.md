@@ -319,6 +319,7 @@ Safety Check → SAFE
 → Continue Mission (Report ACTIVE → Device Shadow)
 → END
 ```
+<br>
 
 **❌ Unsafe Path** *(3 Lambda Invocations)***:**
 ```
@@ -335,6 +336,8 @@ Safety Check → UNSAFE
 > Wait State uses Step Functions' `.waitForTaskToken` callback pattern. <br>
 > - Task token is embedded in the command sent to the VTOL. <br>
 > - VTOL acknowledges via ```MQTT → IoT Rule → SendTaskSuccess``` to resume execution of workflow.
+
+<br>
 
 ⚠️ **Cloud Failsafe Path** *(2 Lambda Invocations)***:**
 ```
