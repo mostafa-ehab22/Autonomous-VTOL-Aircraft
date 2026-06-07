@@ -413,13 +413,14 @@ cdk deploy --all
 ---
 
 ## 🔭 Future Optimizations
-* **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
-  
-* **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
-  
-* **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet resilience.
 
-* **Predictive Trend Classification:** <br> Query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches gradual degradation before any threshold is crossed.
+- **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
+
+- **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
+
+- **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet resilience.
+
+- **Predictive Trend Classification:** <br> Extend Normalizer Lambda to query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches gradual degradation before any threshold is crossed.
 
 ## 📖 Documentation
 
