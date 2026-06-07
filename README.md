@@ -161,27 +161,27 @@ Total Cost = C_IoT + C_Bedrock + C_StepFunctions + C_Lambda  + C_SQS + C_DynamoD
 
 To maintain this efficiency, the architecture relies on four core optimizations:
 
-- 🧠 **Strategic Model Selection:** <br> **Amazon Nova Lite** over Claude Sonnet **cuts inference cost by ~98%** `($0.06 vs $3.00 per 1M tokens)`, sufficient for a binary Continue/Abort verdict.
+- **Strategic Model Selection:** <br> **Amazon Nova Lite** over Claude Sonnet **cuts inference cost by ~98%** `($0.06 vs $3.00 per 1M tokens)`, sufficient for a binary Continue/Abort verdict.
 
-- 📡 **Asymmetric Telemetry Routing:** <br> High-frequency uplink telemetry `Drone → Cloud` bypasses the MQTT broker entirely via **Basic Ingest**, **eliminating 100% of ingestion fees**. Only critical downlink commands `Cloud → Drone` draw from the AWS IoT Core budget.
+- **Asymmetric Telemetry Routing:** <br> High-frequency uplink telemetry `Drone → Cloud` bypasses the MQTT broker entirely via **Basic Ingest**, **eliminating 100% of ingestion fees**. Only critical downlink commands `Cloud → Drone` draw from the AWS IoT Core budget.
   
-- 🪙 **Token Efficiency:** <br> Telemetry adopts a compact JSON schema, strictly capping Bedrock input at **~300 tokens per inference request**.
+- **Token Efficiency:** <br> Telemetry adopts a compact JSON schema, strictly capping Bedrock input at **~300 tokens per inference request**.
 
-- 🗑️ **Ephemeral Log Retention:** <br> CloudWatch logs configured with a **7-day expiration**, preventing storage costs from accumulating over time.
+- **Ephemeral Log Retention:** <br> CloudWatch logs configured with a **7-day expiration**, preventing storage costs from accumulating over time.
 
 ## 🚀 Scaling to a Fleet (1,000+ VTOLs)
 
 Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
 
-- 🔀 **Stateless Concurrency ```(Step Functions & Lambda)```:** <br> Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
+- **Stateless Concurrency ```(Step Functions & Lambda)```:** <br> Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
   
-- 🛡️ **Spike Absorption ```(Amazon SQS)```:** <br> Buffers network reconnections, absorbing telemetry spikes and feeding the pipeline at a controlled rate.
+- **Spike Absorption ```(Amazon SQS)```:** <br> Buffers network reconnections, absorbing telemetry spikes and feeding the pipeline at a controlled rate.
   
-- 🧠 **Elastic AI ```(Amazon Bedrock)```:** <br> Dynamically scales to handle concurrent LLM safety classifications, eliminating edge-device queuing latency.
+- **Elastic AI ```(Amazon Bedrock)```:** <br> Dynamically scales to handle concurrent LLM safety classifications, eliminating edge-device queuing latency.
   
-- 📡 **Mass Device Sync ```(AWS IoT Core)```:** <br> Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
+- **Mass Device Sync ```(AWS IoT Core)```:** <br> Built for millions of connections, maintaining a dedicated, offline-resilient Device Shadow for every aircraft.
   
-- 🌍 **Global Replication ```(AWS CDK)```:** <br> Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region.
+- **Global Replication ```(AWS CDK)```:** <br> Full Infrastructure as Code (IaC) allows one-click deployment of the entire stack to any AWS Region.
 
 > [!IMPORTANT]
 > **Nothing safety-critical moves to the cloud.** All flight controls, perception & failsafes remain fully onboard.
