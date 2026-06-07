@@ -115,7 +115,7 @@ The onboard system is structured into three functional layers plus a dedicated v
 Aircraft is autonomous at the **reflex level**, but a single Raspberry Pi running hardcoded thresholds, with no persistent storage and no communication beyond the local ground station, cannot reason about compound failures, survive a reboot, coordinate a fleet, or reach a pilot when it matters most.
 
 > [!IMPORTANT]
-> This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode** that may endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach.
+> This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode** that would endanger the aircraft, corrupt mission data, or leave the pilot blind to a safety breach.
 
 <div align="center">
 
