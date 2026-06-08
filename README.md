@@ -149,7 +149,7 @@ Total Cost = C_IoT + C_Bedrock + C_StepFunctions + C_Lambda  + C_SQS + C_DynamoD
 | Step Functions | 12 State Transitions | ~$0.0003 |
 | Lambda | 3 Invocations *(128MB, avg. 200ms)* | ~$0.000002 |
 | SQS + SNS | < 1,000 requests | < $0.00001 |
-| DynamoDB | ~10 Writes + ~5 Reads *(mission state & logs)* | < $0.00001 |
+| DynamoDB | ~10 Writes + ~5 Reads | < $0.00001 |
 | **💰 Total** | **1 Complete Mission Cycle** | **~$0.0004** |
 
 </div>
