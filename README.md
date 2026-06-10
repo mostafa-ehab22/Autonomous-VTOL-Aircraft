@@ -42,7 +42,7 @@ Tracing a single ABORT decision across seven stations: from edge anomaly detecti
 
 ### 📥 Buffer & Trigger (Cloud Entry)
 - IoT Core routes the payload into the **Amazon SQS Mission Queue**, absorbing any network reconnect spikes.
-- **EventBridge Pipes** polls the queue and triggers the **Step Functions** state machine *(no intermediary Lambda required)*.
+- **EventBridge Pipes** polls the queue and triggers **AWS Step Functions** directly *(no intermediary Lambda required)*.
 
 ### 🧠 Reason & Decide (Cloud Brain)
 - Step Functions invokes **Amazon Bedrock (Nova Lite)** with the telemetry JSON for safety classification.
