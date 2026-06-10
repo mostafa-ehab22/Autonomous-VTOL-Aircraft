@@ -26,7 +26,7 @@ Both components are **independent by design**, enabling **horizontal scaling** w
 
 ## 🔄 Edge-to-Cloud Pipeline
 
-Tracing a single ABORT decision across seven stations: from edge anomaly detection to confirmed motor response and persistent cloud record:
+Tracing a single ABORT decision across seven stations, from edge anomaly detection to confirmed motor response and persistent cloud record:
 
 <div align="center">
   <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
