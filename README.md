@@ -112,11 +112,11 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🤔 Why a Cloud Extension?
 
-Reflex-level autonomy is **fast, local, and offline by design**, but it has a hard ceiling. This is not a simple compute offload. Every AWS service in this stack was chosen to **eliminate a specific in-flight failure mode**.
+Reflex-level autonomy is **fast, local, and offline by design**, but it has a hard ceiling. This is not a simple compute offload. Every AWS service in this stack was chosen to **eliminate a specific in-flight failure mode**:
 
 <div align="center">
 
-| **Edge Vulnerability** | ☁️ **Cloud Mitigation** | **System Impact** |
+| ***Edge Vulnerability*** | **Cloud Solution** | ***System Impact*** |
 |---|:---:|---|
 | **Compound Failures Slip Through:** <br> Parameters checked in isolation, so multi-factor failure modes pass every individual threshold clean | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry combinations for context-aware safety verdicts |
 | **Reboot Wipes Mission State:** <br> A mid-mission crash wipes telemetry history, flight logs, and all operational context permanently | 🗄️ **DynamoDB** | Continuous off-board streaming ensures mission data survives airframe destruction |
