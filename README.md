@@ -112,7 +112,7 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 ## 🤔 Why a Cloud Extension?
 
-Reflex-level autonomy is **fast, local, and offline by design**, but it has a hard ceiling. Every AWS service in this stack was chosen to **eliminate a specific failure mode** that a single Raspberry Pi running hardcoded thresholds **cannot survive alone**.
+Reflex-level autonomy is **fast, local, and offline by design**, but it has a hard ceiling. Every AWS service was chosen to **eliminate a specific failure mode** that a single Raspberry Pi running hardcoded thresholds **cannot survive alone**.
 
 <div align="center">
 
