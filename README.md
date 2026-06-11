@@ -118,7 +118,7 @@ Reflex-level autonomy is **fast, local, and offline by design**, but it has a ha
 
 | ***Edge Vulnerability*** | **Cloud Solution** | ***System Impact*** |
 |---|:---:|---|
-| **Compound Failures Slip Through:** <br> Parameters checked in isolation, so multi-factor failure modes pass every threshold undetected. | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry combinations for context-aware safety verdicts |
+| **Compound Failures Slip Through:** <br> Multi-factor failure modes pass every individual threshold undetected. | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry combinations for context-aware safety verdicts |
 | **Reboot Wipes Mission State:** <br> A mid-mission crash wipes telemetry history, flight logs, and all operational context | 🗄️ **DynamoDB** | Continuous off-board streaming ensures mission data survives airframe destruction |
 | **Commands Drop on Network Interrupts:** <br> Lost instructions silently discarded with no retry, no acknowledgment, no recovery | 📨 **SQS + DLQ** | Decoupled queue guarantees command delivery despite network volatility |
 | **Reconnection Starts Blind:** <br> Coming back online after a dropout carries no memory of prior mission context | 🥷🏻 **IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
