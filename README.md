@@ -77,7 +77,7 @@ Tracing a single ABORT decision across seven stations, from edge anomaly detecti
 
 ## 🧱 System Architecture
 
-The onboard system is structured into three functional layers plus a dedicated validation layer, each with a clear and isolated responsibility boundary:
+The onboard system is structured into **three functional layers** plus a **dedicated validation layer**, each with a clear and isolated responsibility boundary:
 ### 1️⃣ Perception Layer *(AI & Vision)*
 - **Roboflow** → Real-world annotated dataset for model training
 - **YOLO11** → Real-time object detection and classification
