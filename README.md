@@ -168,7 +168,7 @@ To maintain this efficiency, the architecture relies on four core optimizations:
 
 ## 🚀 Scaling to a Fleet (1,000+ VTOLs)
 
-Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with fleet-scale in mind from day one:
+Unlike monolithic designs, this architecture scales horizontally with **zero code changes**, every service was chosen with **fleet-scale in mind from day one:**
 
 - **Stateless Concurrency ```(Step Functions & Lambda)```:** <br> Every VTOL triggers an isolated execution. 10 or 10,000 drones run simultaneously with zero compute contention.
   
