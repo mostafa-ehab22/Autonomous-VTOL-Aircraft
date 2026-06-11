@@ -215,8 +215,8 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 
 | Criterion | ⛅ Amazon Bedrock *(Selected)* | 🧪 SageMaker Serverless |
 |:---:|---|---|
-| **MLOps** | Managed API with **zero infrastructure** or container maintenance | Requires **Docker**, custom endpoints, and model versioning |
-| **Latency** | **No cold-start**; critical for **sub-second** safety audits | **5-10s cold-start** risk; unacceptable for time-critical safety decisions |
+| **MLOps & Deployment** | Managed API with **zero infrastructure** or container maintenance | Requires **Docker**, custom endpoints, and model versioning |
+| **Inference Latency** | **No cold-start**; critical for **sub-second** safety audits | **5-10s cold-start** risk; unacceptable for time-critical safety decisions |
 | **Fleet Scalability** | **Native elasticity**; handles concurrent multi-drone swarms instantly | Concurrency bottlenecks trigger cold starts under **burst traffic** |
 | **Model Access** | Immediate access to **Nova / Claude FMs** | Restricted to custom weights and manual open-source hosting |
 | **Cost** | **$0.00 idle cost**; pure pay-as-you-fly billing, no containers, no versioning overhead | Fixed endpoint costs regardless of usage |
