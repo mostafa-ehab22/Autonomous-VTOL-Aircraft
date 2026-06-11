@@ -78,24 +78,24 @@ Tracing a single ABORT decision across seven stations, from edge anomaly detecti
 ## 🧱 System Architecture
 
 The onboard system is structured into three functional layers plus a dedicated validation layer, each with a clear and isolated responsibility boundary:
-### 1️⃣ Perception Layer (AI & Vision)
+### 1️⃣ Perception Layer *(AI & Vision)*
 - **Roboflow** → Real-world annotated dataset for model training
 - **YOLO11** → Real-time object detection and classification
 - **OpenCV** → Frame capture and preprocessing pipeline
 
-### 2️⃣ High-Level Logic Layer (Decision Making on Raspberry Pi)
+### 2️⃣ High-Level Logic Layer *(Decision Making on Raspberry Pi)*
 - **Raspberry Pi** → Onboard compute for decision making
 - **ROS2 Jazzy** → Middleware for inter-process communication
 - **Custom Packages & Nodes** → OOP-designed mission logic modules
 - **MAVLink Bridge (Serial/UDP)** → Bidirectional communication with Pixhawk
 
-### 3️⃣ Low-Level Control Layer (Flight Dynamics on Pixhawk RTOS)
+### 3️⃣ Low-Level Control Layer *(Flight Dynamics on Pixhawk RTOS)*
 - **ArduPilot Firmware (Pixhawk)** → Flight controller running on RTOS
 - **EKF3** → Extended Kalman Filter for state estimation (position, velocity, attitude)
 - **TECS** → Total Energy Control System for speed and altitude management
 - **L1 Controller** → Lateral navigation and path following
 
-### 4️⃣ Validation & Safety (Pre-flight & In-flight Guardrails)
+### 4️⃣ Validation & Safety *(Pre-flight & In-flight Guardrails)*
 - **SITL Simulation (Linux)** → Software-in-the-loop testing before hardware deployment 
 - **Pre-Arm Checks** → Validates sensor health and system readiness before flight 
 - **Geofence Failsafe** → Enforces geographic boundaries and triggers RTL on breach 
