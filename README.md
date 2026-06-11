@@ -152,7 +152,7 @@ Total Cost = C_IoT + C_Bedrock + C_StepFunctions + C_Lambda  + C_SQS + C_DynamoD
 </div>
 
 > [!TIP]
-> Can run **2,200+ missions for $1.00 USD**, making this one of the most cost-efficient autonomous fleet architectures possible.
+> Can run **2,200+ missions per $1.00 USD**, among the most cost-efficient autonomous fleet architectures possible.
 
 ### 🛠️ Cost Optimization Strategies
 
