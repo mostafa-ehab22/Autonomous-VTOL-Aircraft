@@ -114,25 +114,18 @@ The onboard system is structured into three functional layers plus a dedicated v
 
 Aircraft is autonomous at the **reflex level**, but a single Raspberry Pi running hardcoded thresholds, with no persistent storage and no communication beyond the local ground station, cannot reason about compound failures, survive a reboot, coordinate a fleet, or reach a pilot when it matters most.
 
-Aircraft is autonomous at the **reflex level**: fast, local, and offline by design. But reflex-level autonomy has a hard ceiling. A single Raspberry Pi with cannot:
-
-- Reason about compound failures
-- Survive a reboot with mission state intact
-- Coordinate across a fleet
-- Reach a pilot when it matters most
-
 > [!IMPORTANT]
 > This is not a simple compute offload: **every responsibility delegated to AWS directly eliminates a real in-flight failure mode**
 
 <div align="center">
 
-| Edge Vulnerability | ☁️ Cloud Mitigation | System Impact |
+| **Edge Vulnerability** | ☁️ **Cloud Mitigation** | **System Impact** |
 |---|:---:|---|
-| **Static Thresholds:** Each parameter checked in isolation, compound failure modes pass every individual check undetected | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry combinations for context-aware safety verdicts |
-| **Volatile Storage:** A mid-mission reboot wipes telemetry history, mission state, and flight logs permanently | 🗄️ **DynamoDB** | Continuous off-board streaming ensures mission data survives airframe destruction |
-| **Dropped Commands:** Network blips silently discard instructions with no retry or delivery guarantee | 📨 **SQS + DLQ** | Decoupled queue guarantees command delivery despite network volatility |
-| **Ephemeral State:** Reconnection after a network drop starts with no prior mission context | 🥷🏻 **IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
-| **Isolated Alerts:** Safety warnings confined to local ground station with no remote visibility | 🔔 **SNS** | Push notifications (Mobile/Email) instantly reach all stakeholders on any safety breach |
+| **Compound Failures Slip Through:** Parameters checked in isolation, so multi-factor failure modes pass every individual threshold clean | 🧠 **Bedrock** | Foundation Model evaluates multi-variable telemetry combinations for context-aware safety verdicts |
+| **Reboot Wipes Mission State:** A mid-mission crash wipes telemetry history, flight logs, and all operational context permanently | 🗄️ **DynamoDB** | Continuous off-board streaming ensures mission data survives airframe destruction |
+| **Commands Drop on Network Interrupts:** Lost instructions silently discarded with no retry, no acknowledgment, no recovery | 📨 **SQS + DLQ** | Decoupled queue guarantees command delivery despite network volatility |
+| **Reconnection Starts Blind:** Coming back online after a dropout carries no memory of prior mission context | 🥷🏻 **IoT Device Shadow** | Persistent cloud sync allows instant mission resumption on reconnection |
+| **Pilot Unreachable in Crisis:** Safety warnings trapped at the local ground station with zero path to remote operators | 🔔 **SNS** | Push notifications (Mobile/Email) instantly reach all stakeholders on any safety breach |
 
 </div>
 
