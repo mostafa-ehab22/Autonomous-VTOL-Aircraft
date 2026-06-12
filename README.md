@@ -32,34 +32,34 @@ Tracing a single ABORT decision across seven stations, from edge anomaly detecti
   <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
 </div>
 
-### 👀 Sense (Edge)
+### 👀 Sense *(Edge)*
 - **YOLO11** (on Raspberry Pi) detects an anomaly mid-flight.
 - **ArduPilot** (on Pixhawk) simultaneously registers degraded battery voltage and elevated wind resistance via **EKF3**.
 
-### 📡 Package & Transmit (Bridge)
+### 📡 Package & Transmit *(Bridge)*
 - **ROS2 MAVLink Bridge** normalizes both perception and flight telemetry into a structured JSON payload.
 - Published via **MQTT over TLS (Port 8883)** to **AWS IoT Core**: the single handoff point between edge and cloud.
 
-### 📥 Buffer & Trigger (Cloud Entry)
+### 📥 Buffer & Trigger *(Cloud Entry)*
 - IoT Core routes the payload into the **Amazon SQS Mission Queue**, absorbing any network reconnect spikes.
 - **EventBridge Pipes** polls the queue and triggers **AWS Step Functions** directly *(no intermediary Lambda required)*.
 
-### 🧠 Reason & Decide (Cloud Brain)
+### 🧠 Reason & Decide *(Cloud Brain)*
 - Step Functions invokes **Amazon Bedrock (Nova Lite)** with the telemetry JSON for safety classification.
 - Bedrock returns: `{"verdict": "Abort", "confidence": 0.92}`.
 - Since `confidence ≥ 0.75`, the verdict is trusted. Step Functions routes down the `UNSAFE` path.
 
-### 🚨 Alert & Command (Cloud Exit)
+### 🚨 Alert & Command *(Cloud Exit)*
 - **Abort Lambda** updates the **IoT Device Shadow** `desired` state to `ABORT`, embedding a `.waitForTaskToken`.
 - **SNS** fires an immediate alert to the pilot's mobile/email.
 - Step Functions pauses, waiting for physical confirmation from the aircraft.
 
-### ⚡ Act (Edge Reflex)
+### ⚡ Act *(Edge Reflex)*
 - ROS2 node, subscribed to its **Device Shadow delta**, instantly receives the state change.
 - Translates `ABORT` into a MAVLink `SET_MODE` command and sends it via serial to the **Pixhawk**.
 - Pixhawk takes physical control and executes the abort maneuver.
 
-### ✅ Acknowledge (Loop Closes)
+### ✅ Acknowledge *(Loop Closes)*
 - ROS2 node publishes an MQTT ACK back to **IoT Core**.
 - An **IoT Rule** triggers the **Acknowledge Lambda** with the task token.
 - **Acknowledge Lambda** calls `SendTaskSuccess`, resuming Step Functions execution.
