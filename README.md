@@ -341,7 +341,7 @@ AWS IoT Core
 > - **Upstream `(VTOL → Cloud)`:** Publishes telemetry to AWS IoT Core via MQTT over TLS.
 > - **Downstream `(Cloud → VTOL)`:** Receives cloud commands *(abort, reroute)* via Device Shadow delta updates.
 >
-> 📖 See the full [Integration Guide](docs/integration_guide.md) here.
+> 📖 See the full [Integration Guide](docs/integration_guide.md)
 
 ## 📂 Project Structure
 ```
