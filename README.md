@@ -29,7 +29,7 @@ Both components are **independent by design**, enabling **horizontal scaling** w
 Tracing a single ABORT decision across seven stations, from edge anomaly detection to confirmed motor response and persistent cloud record:
 
 <div align="center">
-  <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow" width="99%"/>
+  <img src="docs/telemetry_packet.png" alt="Telemetry Packet Flow Diagram" width="99%"/>
 </div>
 
 ### 👀 Sense *(Edge)*
