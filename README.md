@@ -209,7 +209,7 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 
 ## 🧠 Safety Classifier: Bedrock vs. SageMaker
 
-While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the **Strategic Safety Classifier** at the cloud decision layer for the following reasons:
+While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the **Strategic Safety Classifier** at the cloud AI decision layer for the following reasons:
 
 <div align="center">
 
