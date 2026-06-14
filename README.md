@@ -413,7 +413,7 @@ cdk deploy --all
 
 - **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
 
-- **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet resilience.
+- **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet failover resilience.
 
 - **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
 
