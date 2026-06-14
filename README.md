@@ -207,7 +207,7 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - **AWS X-Ray** → Distributed tracing across the serverless pipeline
 - **AWS IAM** → Strict least-privilege access control across all services
 
-## 🧠 AI Selection: Bedrock vs. SageMaker
+## 🧠 AI Classifier: Bedrock vs. SageMaker
 
 While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the **Strategic Safety Classifier** at the cloud decision layer for the following reasons:
 
