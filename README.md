@@ -207,9 +207,9 @@ Unlike monolithic designs, this architecture scales horizontally with **zero cod
 - **AWS X-Ray** → Distributed tracing across the serverless pipeline
 - **AWS IAM** → Strict least-privilege access control across all services
 
-## 🧠 AI Selection: Bedrock vs. SageMaker
+## 🧠 Safety Classifier: Bedrock vs. SageMaker
 
-While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the **Strategic Safety Classifier** at the cloud decision layer for the following reasons:
+While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock was selected as the **Strategic Safety Classifier** at the cloud AI decision layer for the following reasons:
 
 <div align="center">
 
@@ -218,8 +218,8 @@ While SageMaker *(including Serverless Inference)* was evaluated, Amazon Bedrock
 | **MLOps & Deployment** | Managed API with **zero infrastructure** or container maintenance | Requires **Docker**, custom endpoints, and model versioning |
 | **Inference Latency** | **No cold-start**; critical for **sub-second** safety audits | **5-10s cold-start** risk; unacceptable for time-critical safety decisions |
 | **Fleet Scalability** | **Native elasticity**; handles concurrent multi-drone swarms instantly | Concurrency bottlenecks trigger cold starts under **burst traffic** |
-| **Model Access** | Immediate access to **Nova / Claude FMs** | Restricted to custom weights and manual open-source hosting |
-| **Cost** | **$0.00 idle cost**; pure pay-as-you-fly billing, no containers, no versioning overhead | Fixed endpoint costs regardless of usage |
+| **Model Access** | Immediate access to **Nova / Claude FMs** | Restricted to **custom weights** and manual open-source hosting |
+| **Cost** | **$0.00 idle cost**; pure pay-as-you-fly billing, no containers, no versioning overhead | **Fixed endpoint costs** regardless of usage |
 
 </div>
 
@@ -413,9 +413,9 @@ cdk deploy --all
 
 - **Lambda SnapStart:** <br> Evaluate Python execution caching to reduce cold-starts on the `UNSAFE` path, balancing sub-second latency gains against snapshot storage costs.
 
-- **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
+- **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet failover resilience.
 
-- **Multi-Region Active-Active:** <br> Expand the CDK stack to replicate DynamoDB and IoT endpoints to a secondary AWS Region for absolute fleet resilience.
+- **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
 
 - **Predictive Trend Classification:** <br> Extend Normalizer Lambda to query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches degradation before any threshold is crossed.
 
