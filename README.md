@@ -426,9 +426,9 @@ cdk deploy --all
 | Document | Description |
 | :--- | :--- |
 | [Source Files & Full Assets](docs/) | **Technical Source:** `.drawio` diagram and detailed guides |
+| [Telemetry Flow Diagram](docs/telemetry_packet.png) | End-to-end lifecycle of a single mission decision |
 | [Onboard System Diagram](docs/onboard_architecture.png) | Embedded flight control & logic pipeline |
 | [Cloud Extension Diagram](docs/cloud_architecture.jpg) | AWS serverless backend architecture |
-| [Telemetry Flow Diagram](docs/telemetry_packet.png) | End-to-end lifecycle of a single mission decision |
 | [Integration Guide](docs/integration_guide.md) | MAVLink telemetry to AWS IoT Core bridge |
 
 </div>
