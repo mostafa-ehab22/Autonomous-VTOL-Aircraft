@@ -417,7 +417,7 @@ cdk deploy --all
 
 - **Edge ML Offloading:** <br> Investigate deploying quantized safety models directly to the Raspberry Pi via AWS IoT Greengrass for offline, zero-latency safety classifications.
 
-- **Predictive Trend Classification:** <br> Extend Normalizer Lambda to query the last N DynamoDB readings before Bedrock invocation, shifting classification from a single snapshot to a rolling window that catches degradation before any threshold is crossed.
+- **Predictive Trend Classification:** <br> Extend Normalizer Lambda to query the last N DynamoDB readings before AI invocation, shifting classification from a single snapshot to a rolling window that catches degradation before any threshold is crossed.
 
 ## 📖 Documentation
 
