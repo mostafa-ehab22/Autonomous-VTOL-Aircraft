@@ -8,6 +8,10 @@ Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combinin
 
 **Split-second flight reflexes** remain onboard, while **strategic mission intelligence** is powered by cloud-level AI. Designed to scale from one aircraft to a **fleet of thousands** with **zero architectural changes**.
 
+<div align="center">
+  <img src="docs/VTOL Aircraft.png" alt="VTOL Aircraft" width="99%"/>
+</div>
+
 ## 🧩 Dual-Component System
   
 <div align="center">
