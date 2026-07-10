@@ -10,8 +10,8 @@ Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combinin
 
 <div align="center">
   <img src="docs/VTOL Aircraft.png" alt="VTOL Aircraft" height="220"/>
+  <span style="display:inline-block; width: 10px;"></span>
   <img src="docs/VTOL CAD.jpg" alt="VTOL CAD" height="220"/>
-  <br>
 </div>
 
 ## 🧩 Dual-Component System
