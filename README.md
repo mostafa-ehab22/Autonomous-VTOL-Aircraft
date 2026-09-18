@@ -4,6 +4,7 @@
 ![ROS2](https://img.shields.io/badge/ROS2-0A7D4B?logo=ros)
 ![ArduPilot](https://img.shields.io/badge/ArduPilot-F5982A?logo=drone&logoColor=white)
 
+
 Fully autonomous VTOL *(Vertical Take-Off and Landing)* aircraft system combining **onboard flight control** with a **stateless AWS serverless cloud extension** for AI-driven mission decision-making.
 
 **Split-second flight reflexes** remain onboard, while **strategic mission intelligence** is powered by cloud-level AI. Designed to scale from one aircraft to a **fleet of thousands** with **zero architectural changes**.
@@ -439,17 +440,11 @@ cdk deploy --all
 
 </div>
 
+## 🎖️ Acknowledgments
 
+* **Cloud architecture** supported by [Manara](https://manara.tech/), who sponsored my [AWS Solutions Architect - Associate](https://www.credly.com/badges/5cd905f6-d66c-4322-a426-ec143929c493) credential.
+* **Aircraft design** built with the [Lycans AeroDesign Team](https://www.lycansteam.com/), Alexandria University.
+  
 ## ⚖️ License
 
 Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more information.
-
-## 🤝 Contributing
-
-Issues and suggestions are welcome, feel free to open an issue for discussion.
-
----
-
-<div align="center">
-  <sub>Built with <a href="https://www.lycansteam.com/">Lycans AeroDesign Team</a> · Alexandria University</sub>
-</div>
