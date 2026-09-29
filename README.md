@@ -442,7 +442,7 @@ cdk deploy --all
 
 ## 🎖️ Acknowledgments
 
-* **Cloud architecture** supported by [Manara](https://manara.tech/), who sponsored my [AWS Solutions Architect - Associate](https://www.credly.com/badges/5cd905f6-d66c-4322-a426-ec143929c493) credential.
+* **Cloud architecture** supported by [Manara](https://manara.tech/) who sponsored my [AWS Solutions Architect - Associate](https://www.credly.com/badges/5cd905f6-d66c-4322-a426-ec143929c493) credential.
 * **Aircraft design** built with the [Lycans AeroDesign Team](https://www.lycansteam.com/) at Alexandria University.
   
 ## ⚖️ License
